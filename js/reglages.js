@@ -1,5 +1,6 @@
 (function () {
   const REPO = "oreka-metz/oreka-metz.github.io";
+  try { localStorage.removeItem("oreka-token"); } catch (error) { /* ancien jeton */ }
   const gate = document.getElementById("gate");
   const editor = document.getElementById("editor");
   const status = document.getElementById("status");
@@ -183,8 +184,15 @@
     document.documentElement.style.setProperty("--pink", colors.pink || "#f61c96");
   }
 
+  function rememberToken(token) {
+    try {
+      if (token) sessionStorage.setItem("oreka-token", token);
+      else sessionStorage.removeItem("oreka-token");
+    } catch (error) { /* session unavailable */ }
+  }
+
   function collect() {
-    const texts = {};
+    const texts = Object.assign({}, (site && site.texts) || {});
     document.querySelectorAll("[data-text]").forEach(function (field) {
       texts[field.getAttribute("data-text")] = field.value.trim();
     });
@@ -235,7 +243,8 @@
       showStatus("Brouillon de ce navigateur repris. Le site public n’a pas encore changé.");
     }
     fill(data);
-    const saved = localStorage.getItem("oreka-token") || "";
+    let saved = "";
+    try { saved = sessionStorage.getItem("oreka-token") || ""; } catch (error) { saved = ""; }
     if (saved) document.getElementById("token").value = saved;
   }
 
@@ -366,7 +375,7 @@
         toBase64(new TextEncoder().encode(json)),
         "Mettre à jour les réglages du site OREKA."
       );
-      localStorage.setItem("oreka-token", token);
+      rememberToken(token);
       localStorage.setItem("oreka-draft", JSON.stringify(next));
       fill(next);
       showStatus("C’est publié. Le site public se met à jour dans environ une minute. Rechargez la page d’accueil ensuite.");
@@ -374,5 +383,11 @@
       showStatus(error.message || "La publication n’a pas abouti.");
     }
     button.disabled = false;
+  });
+
+  document.getElementById("forget-token").addEventListener("click", function () {
+    rememberToken("");
+    document.getElementById("token").value = "";
+    showStatus("Le jeton est effacé de ce navigateur.");
   });
 })();

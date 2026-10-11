@@ -318,9 +318,10 @@
   boot("countdown", function () {
     const root = document.querySelector("[data-countdown]");
     if (!root) return;
-    let target = new Date("2027-03-20T18:00:00+01:00").getTime();
-    let whenLabel = "20 mars 2027";
+    let target = new Date("2027-04-20T18:00:00+02:00").getTime();
+    let whenLabel = "20 avril 2027";
     let lastSpoken = "";
+    let dateReady = false;
 
     function useSiteDate() {
       const iso = window.OREKA_SITE && window.OREKA_SITE.countdown;
@@ -337,8 +338,13 @@
       lastSpoken = "";
     }
 
-    if (window.OREKA_READY) useSiteDate();
-    document.addEventListener("oreka-content", useSiteDate);
+    function armDate() {
+      useSiteDate();
+      dateReady = true;
+      lastSpoken = "";
+      tick();
+    }
+    document.addEventListener("oreka-content", armDate);
     const units = {
       days: root.querySelector('[data-count="days"]'),
       hours: root.querySelector('[data-count="hours"]'),
@@ -366,13 +372,14 @@
       const spoken = diff === 0
         ? "La date indicative du jour J est atteinte."
         : days + " jours, " + hours + " heures et " + minutes + " minutes avant le jour J, date indicative du " + whenLabel + ".";
-      if (live && spoken !== lastSpoken && (seconds === 0 || lastSpoken === "")) {
+      if (live && dateReady && spoken !== lastSpoken && (seconds === 0 || lastSpoken === "")) {
         live.textContent = spoken;
         lastSpoken = spoken;
       }
     }
 
-    tick();
+    if (window.OREKA_READY) armDate();
+    else tick();
     window.setInterval(tick, 1000);
   });
 
@@ -479,6 +486,8 @@
     function endDrag() {
       dragging = false;
       paused = false;
+      target = Math.round(target / step) * step;
+      hold();
     }
     stage.addEventListener("pointerup", endDrag);
     stage.addEventListener("pointercancel", endDrag);
@@ -495,10 +504,12 @@
       if (event.key === "ArrowRight") {
         event.preventDefault();
         target -= step;
+        hold();
       }
       if (event.key === "ArrowLeft") {
         event.preventDefault();
         target += step;
+        hold();
       }
     });
 
@@ -539,7 +550,8 @@
     const preview = document.getElementById("message-preview");
     const submit = form.querySelector("[type=submit]");
     const fieldsWrap = document.getElementById("form-body");
-    if (inbox && submit) submit.textContent = "Envoyer la demande";
+    const openedAt = Date.now();
+    let pendingText = "";
 
     function selectedRole() {
       const input = form.querySelector('input[name="role"]:checked');
@@ -690,30 +702,119 @@
       }
     }
 
-    async function send(text) {
-      if (!inbox) return false;
-      const response = await fetch("https://formsubmit.co/ajax/" + encodeURIComponent(inbox), {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          name: valueOf("nom"),
-          email: valueOf("email"),
-          structure: valueOf("structure"),
-          profil: ROLES[selectedRole()] || "",
-          place: GROUPS[selectedRole()] || "",
-          message: text,
-          _subject: "Partenariat OREKA — " + valueOf("structure"),
-          _template: "table",
-          _captcha: "false"
-        })
+    function trapFilled() {
+      const trap = document.getElementById("company");
+      return !!(trap && trap.value.trim());
+    }
+
+    function recentSends() {
+      try {
+        const now = Date.now();
+        const raw = sessionStorage.getItem("oreka-sends");
+        const list = raw ? JSON.parse(raw) : [];
+        return list.filter(function (time) { return now - time < 3600000; });
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function noteSend() {
+      try {
+        const recent = recentSends();
+        recent.push(Date.now());
+        sessionStorage.setItem("oreka-sends", JSON.stringify(recent));
+      } catch (error) { /* session unavailable */ }
+    }
+
+    function showPrepared(text) {
+      pendingText = text;
+      if (alertBox) alertBox.hidden = true;
+      if (preview) {
+        preview.hidden = false;
+        preview.textContent = text;
+      }
+      const title = document.getElementById("success-title");
+      const lead = document.getElementById("success-lead");
+      if (title) title.textContent = "Demande prête";
+      if (lead) lead.textContent = "Relisez le message. Il n’est pas encore envoyé. Confirmez pour le transmettre au collectif, ou ouvrez-le dans votre e-mail.";
+      const mail = document.getElementById("mailto-link");
+      if (mail) {
+        mail.hidden = false;
+        mail.href = "mailto:" + (inbox || "")
+          + "?subject=" + encodeURIComponent("Partenariat OREKA — " + valueOf("structure"))
+          + "&body=" + encodeURIComponent(text);
+      }
+      const confirm = document.getElementById("confirm-send");
+      if (confirm) {
+        confirm.hidden = !inbox;
+        confirm.disabled = false;
+        confirm.textContent = "Envoyer la demande";
+      }
+      if (fieldsWrap) fieldsWrap.hidden = true;
+      if (success) {
+        success.hidden = false;
+        success.focus();
+      }
+    }
+
+    function showSent() {
+      const title = document.getElementById("success-title");
+      const lead = document.getElementById("success-lead");
+      if (title) title.textContent = "Demande envoyée";
+      if (lead) lead.textContent = "Le collectif a reçu votre message et peut vous répondre à l’adresse indiquée.";
+      if (preview) preview.hidden = true;
+      const confirm = document.getElementById("confirm-send");
+      if (confirm) confirm.hidden = true;
+      const mail = document.getElementById("mailto-link");
+      if (mail) mail.hidden = true;
+      if (fieldsWrap) fieldsWrap.hidden = true;
+      if (success) {
+        success.hidden = false;
+        success.focus();
+      }
+    }
+
+    function postInbox(text) {
+      const post = document.createElement("form");
+      post.method = "POST";
+      post.action = "https://formsubmit.co/" + encodeURIComponent(inbox);
+      post.acceptCharset = "UTF-8";
+      const fields = {
+        name: valueOf("nom"),
+        email: valueOf("email"),
+        _replyto: valueOf("email"),
+        structure: valueOf("structure"),
+        profil: ROLES[selectedRole()] || "",
+        place: GROUPS[selectedRole()] || "",
+        message: text,
+        _subject: "Partenariat OREKA — " + valueOf("structure"),
+        _template: "table",
+        _honey: "",
+        _next: "https://oreka-metz.github.io/?envoye=1"
+      };
+      Object.keys(fields).forEach(function (key) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = fields[key];
+        post.appendChild(input);
       });
-      if (!response.ok) return false;
-      const data = await response.json().catch(function () { return {}; });
-      return data.success === true || data.success === "true";
+      document.body.appendChild(post);
+      post.submit();
     }
 
     restoreDraft();
     refresh();
+
+    if (new URLSearchParams(location.search).get("envoye") === "1") {
+      showSent();
+      try {
+        const params = new URLSearchParams(location.search);
+        params.delete("envoye");
+        const query = params.toString();
+        history.replaceState(null, "", location.pathname + (query ? "?" + query : "") + "#rejoindre");
+      } catch (error) { /* keep the address */ }
+    }
 
     form.addEventListener("input", function () {
       refresh();
@@ -724,48 +825,43 @@
       saveDraft();
     });
 
-    form.addEventListener("submit", async function (event) {
+    form.addEventListener("submit", function (event) {
       event.preventDefault();
+      if (Date.now() - openedAt < 1500) {
+        if (alertBox) {
+          alertBox.hidden = false;
+          alertBox.textContent = "Merci de relire le formulaire un instant avant de préparer la demande.";
+        }
+        return;
+      }
       if (!validate()) return;
-      const text = compose();
-      if (submit) {
-        submit.disabled = true;
-        submit.textContent = "Préparation…";
+      if (trapFilled()) {
+        showSent();
+        return;
       }
-      let sent = false;
-      try { sent = await send(text); }
-      catch (error) { sent = false; }
-      const copied = await copyText(text);
-      if (preview) preview.textContent = text;
-      const title = document.getElementById("success-title");
-      const lead = document.getElementById("success-lead");
-      if (sent) {
-        if (title) title.textContent = "Demande envoyée";
-        if (lead) lead.textContent = "Le collectif a reçu votre message et peut vous répondre à l’adresse indiquée. Une copie est aussi dans le presse-papiers.";
-      } else if (inbox) {
-        if (title) title.textContent = "Demande prête";
-        if (lead) lead.textContent = copied
-          ? "L’envoi automatique n’a pas abouti. Le message est copié : transmettez-le au collectif."
-          : "L’envoi automatique n’a pas abouti. Copiez le message ci-dessous et transmettez-le au collectif.";
-      } else {
-        if (title) title.textContent = "Demande prête";
-        if (lead) lead.textContent = "Ouvrez le message dans votre e-mail pour l’adresser au collectif, ou copiez-le.";
-      }
-      const mail = document.getElementById("mailto-link");
-      if (mail) {
-        mail.href = "mailto:" + (inbox || "")
-          + "?subject=" + encodeURIComponent("Partenariat OREKA — " + valueOf("structure"))
-          + "&body=" + encodeURIComponent(text);
-      }
-      if (fieldsWrap) fieldsWrap.hidden = true;
-      if (success) success.hidden = false;
       try { sessionStorage.removeItem("oreka-partner-draft"); } catch (error) { /* ignore */ }
-      if (submit) {
-        submit.disabled = false;
-        submit.textContent = inbox ? "Envoyer la demande" : "Composer la demande";
-      }
-      if (success) success.focus();
+      showPrepared(compose());
     });
+
+    const confirmSend = document.getElementById("confirm-send");
+    if (confirmSend) {
+      confirmSend.addEventListener("click", function () {
+        if (!inbox || !pendingText) return;
+        if (trapFilled()) {
+          showSent();
+          return;
+        }
+        if (recentSends().length >= 3) {
+          const lead = document.getElementById("success-lead");
+          if (lead) lead.textContent = "Plusieurs demandes viennent d’être envoyées depuis ce navigateur. Réessayez plus tard, ou ouvrez le message dans votre e-mail.";
+          return;
+        }
+        noteSend();
+        confirmSend.disabled = true;
+        confirmSend.textContent = "Envoi…";
+        postInbox(pendingText);
+      });
+    }
 
     const again = document.getElementById("new-request");
     if (again) {

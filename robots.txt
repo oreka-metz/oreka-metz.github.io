@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /reglages.html
 
 Sitemap: https://oreka-metz.github.io/sitemap.xml
