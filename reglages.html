@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Réglages — OREKA</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#fff7fb">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,560;1,9..144,560&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/reglages.css">
+</head>
+<body>
+  <main id="gate" class="wrap gate">
+    <p class="eyebrow">Collectif uniquement</p>
+    <h1>Réglages</h1>
+    <p class="lede">Cette page n’est pas dans le menu du site. Elle sert à modifier le logo, les couleurs, les textes, les partenaires et la date du compte à rebours.</p>
+    <form id="gate-form">
+      <div class="field">
+        <label for="gate-code">Code d’accès</label>
+        <input id="gate-code" type="password" autocomplete="current-password" required>
+      </div>
+      <p class="field-error" id="gate-error" hidden>Code incorrect.</p>
+      <button class="btn btn-primary" type="submit">Entrer</button>
+    </form>
+  </main>
+
+  <main id="editor" class="wrap editor" hidden>
+    <div class="editor-head">
+      <div>
+        <p class="eyebrow">Non public</p>
+        <h1>Régler le site</h1>
+      </div>
+      <div class="actions">
+        <a class="btn btn-ghost" id="preview-link" href="index.html?apercu=1" target="_blank" rel="noopener">Voir l’aperçu</a>
+        <button class="btn btn-primary" id="publish" type="button">Publier sur le site</button>
+      </div>
+    </div>
+
+    <div class="panel-set">
+      <section class="settings-card">
+        <h2>Date du compte à rebours</h2>
+        <div class="stack">
+          <label>Jour et heure, à Paris
+            <input id="field-countdown" type="datetime-local" required>
+          </label>
+          <label>Ligne au-dessus du compteur
+            <input id="field-eyebrow" data-text="eyebrow">
+          </label>
+          <label>Phrase sous le compteur
+            <input id="field-countNote" data-text="countNote">
+          </label>
+          <label class="consent"><input id="sync-date-text" type="checkbox" checked><span>Mettre ces deux phrases à jour quand la date change.</span></label>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <h2>Logo</h2>
+        <div class="logo-row">
+          <img id="logo-preview" alt="Logo actuel">
+          <label class="btn btn-ghost">Choisir une image
+            <input id="field-logo" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+          </label>
+        </div>
+        <p class="help">Un fichier PNG avec fond transparent garde le détourage. Le logo actuel reste en place tant qu’un nouveau fichier n’est pas publié.</p>
+      </section>
+
+      <section class="settings-card">
+        <h2>Couleurs</h2>
+        <div class="color-grid">
+          <label>Fond <input id="color-bg" type="color" value="#fff7fb"></label>
+          <label>Texte <input id="color-ink" type="color" value="#2a1220"></label>
+          <label>Texte secondaire <input id="color-muted" type="color" value="#5c3a4a"></label>
+          <label>Rose <input id="color-pink" type="color" value="#f61c96"></label>
+          <label>Rose foncé <input id="color-pink2" type="color" value="#d01278"></label>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <h2>Textes</h2>
+        <div class="stack">
+          <label>Titre des partenaires <input data-text="partnersTitle"></label>
+          <label>Introduction des partenaires <textarea data-text="partnersIntro"></textarea></label>
+          <label>Note sous la liste <input data-text="partnersHint"></label>
+          <label>Titre de la présentation <input data-text="projectTitle"></label>
+          <label>Présentation <textarea data-text="projectBody"></textarea></label>
+          <label>Titre du formulaire <input data-text="formTitle"></label>
+          <label>Introduction du formulaire <textarea data-text="formIntro"></textarea></label>
+          <label>Pied de page <input data-text="footer"></label>
+        </div>
+      </section>
+
+      <section class="settings-card">
+        <h2>Partenaires</h2>
+        <p class="help">Nom, et photo si vous en avez une. L’ordre est celui de la liste qui tourne.</p>
+        <div id="partner-list"></div>
+        <button class="btn btn-ghost" id="add-partner" type="button">Ajouter un partenaire</button>
+      </section>
+
+      <section class="settings-card">
+        <h2>Publication</h2>
+        <p class="help">L’aperçu reste dans ce navigateur. Pour que tout le monde voie les changements, publiez avec un jeton GitHub du compte qui possède le dépôt. Le jeton n’est pas enregistré dans le site : il reste dans ce navigateur.</p>
+        <ol class="help">
+          <li>GitHub → Settings → Developer settings → Personal access tokens.</li>
+          <li>Jeton classique avec le droit <strong>repo</strong>, ou jeton fin limité au dépôt <strong>oreka</strong>, contenu en lecture et écriture.</li>
+          <li>Collez-le ici, puis publiez. Le site public se met à jour en une minute environ.</li>
+        </ol>
+        <div class="field">
+          <label for="token">Jeton GitHub</label>
+          <input id="token" type="password" autocomplete="off">
+        </div>
+        <p class="status" id="status" hidden></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/reglages.js"></script>
+</body>
+</html>

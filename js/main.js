@@ -318,7 +318,27 @@
   boot("countdown", function () {
     const root = document.querySelector("[data-countdown]");
     if (!root) return;
-    const target = new Date("2027-03-20T18:00:00+01:00").getTime();
+    let target = new Date("2027-03-20T18:00:00+01:00").getTime();
+    let whenLabel = "20 mars 2027";
+    let lastSpoken = "";
+
+    function useSiteDate() {
+      const iso = window.OREKA_SITE && window.OREKA_SITE.countdown;
+      if (!iso) return;
+      const next = new Date(iso).getTime();
+      if (Number.isNaN(next)) return;
+      target = next;
+      whenLabel = new Date(iso).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "Europe/Paris"
+      });
+      lastSpoken = "";
+    }
+
+    if (window.OREKA_READY) useSiteDate();
+    document.addEventListener("oreka-content", useSiteDate);
     const units = {
       days: root.querySelector('[data-count="days"]'),
       hours: root.querySelector('[data-count="hours"]'),
@@ -326,7 +346,6 @@
       seconds: root.querySelector('[data-count="seconds"]')
     };
     const live = document.getElementById("count-live");
-    let lastSpoken = "";
 
     function pad(value) {
       return String(value).padStart(2, "0");
@@ -346,7 +365,7 @@
       if (units.seconds) units.seconds.textContent = pad(seconds);
       const spoken = diff === 0
         ? "La date indicative du jour J est atteinte."
-        : days + " jours, " + hours + " heures et " + minutes + " minutes avant le jour J, date indicative du 20 mars 2027.";
+        : days + " jours, " + hours + " heures et " + minutes + " minutes avant le jour J, date indicative du " + whenLabel + ".";
       if (live && spoken !== lastSpoken && (seconds === 0 || lastSpoken === "")) {
         live.textContent = spoken;
         lastSpoken = spoken;
@@ -357,7 +376,7 @@
     window.setInterval(tick, 1000);
   });
 
-  boot("reel", function () {
+  function mountReel() {
     const root = document.querySelector("[data-reel]");
     if (!root) return;
     const stage = root.querySelector(".reel-stage");
@@ -492,6 +511,21 @@
 
     render();
     window.requestAnimationFrame(frame);
+  }
+
+  boot("reel", function () {
+    if (window.OREKA_READY) {
+      mountReel();
+      return;
+    }
+    let started = false;
+    const go = function () {
+      if (started) return;
+      started = true;
+      mountReel();
+    };
+    document.addEventListener("oreka-content", go);
+    window.setTimeout(go, 2200);
   });
 
   boot("form", function () {

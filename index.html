@@ -53,7 +53,7 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="#jour" aria-label="Oreka Metz">
-        <img src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
+        <img data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" class="site-nav" aria-label="Navigation principale">
@@ -70,8 +70,8 @@
     <section class="hero" id="jour" aria-labelledby="hero-title">
       <div class="wrap hero-open">
         <h1 id="hero-title" class="sr">Oreka Metz, compte à rebours du jour J</h1>
-        <img class="hero-logo" src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
-        <p class="eyebrow">Jour J · mars 2027</p>
+        <img class="hero-logo" data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
+        <p class="eyebrow" data-bind="eyebrow">Jour J · mars 2027</p>
         <div class="count" data-countdown aria-hidden="true">
           <div><strong data-count="days">00</strong><span>jours</span></div>
           <div><strong data-count="hours">00</strong><span>heures</span></div>
@@ -79,7 +79,7 @@
           <div><strong data-count="seconds">00</strong><span>secondes</span></div>
         </div>
         <p class="sr" id="count-live" aria-live="polite"></p>
-        <p class="count-note">Date indicative : samedi 20 mars 2027. Le collectif confirmera le jour exact.</p>
+        <p class="count-note" data-bind="countNote">Date indicative : samedi 20 mars 2027. Le collectif confirmera le jour exact.</p>
         <div class="actions">
           <a class="btn btn-primary" href="#rejoindre">Devenir partenaire</a>
           <a class="btn btn-ghost" href="#oreka">Lire la présentation</a>
@@ -92,11 +92,11 @@
         <div class="section-head reveal">
           <span class="index-no">01</span>
           <div>
-            <p class="eyebrow">Partenaires</p>
-            <h2 id="partners-title">Une liste qui tourne.</h2>
+            <p class="eyebrow" data-bind="partnersEyebrow">Partenaires</p>
+            <h2 id="partners-title" data-bind="partnersTitle">Une liste qui tourne.</h2>
           </div>
         </div>
-        <p class="prose reveal">Hôtels, restaurants et traiteurs pour le projet. Animateurs et DJ pour le jour de l’événement. Faites tourner la liste, ou choisissez une carte.</p>
+        <p class="prose reveal" data-bind="partnersIntro">Hôtels, restaurants et traiteurs pour le projet. Animateurs et DJ pour le jour de l’événement. Faites tourner la liste, ou choisissez une carte.</p>
         <div class="reel reveal" data-reel aria-roledescription="carrousel" aria-label="Partenaires">
           <div class="reel-stage">
             <button type="button" class="reel-card" data-card data-detail="Un hôtel peut accompagner les 13 membres pour réaliser le projet.">
@@ -125,7 +125,7 @@
             <button class="reel-arrow" type="button" data-next aria-label="Partenaire suivant">›</button>
           </div>
           <p class="reel-detail" id="reel-detail">Choisissez une carte, ou laissez la liste tourner.</p>
-          <p class="hint reel-hint">Dès qu’un partenaire confirme, son nom ou son logo prend la place de la carte.</p>
+          <p class="hint reel-hint" data-bind="partnersHint">Dès qu’un partenaire confirme, son nom ou son logo prend la place de la carte.</p>
         </div>
       </div>
     </section>
@@ -133,9 +133,9 @@
     <section class="section band" id="oreka" aria-labelledby="oreka-title">
       <div class="wrap present">
         <div class="reveal">
-          <p class="eyebrow">Le projet</p>
-          <h2 id="oreka-title">Treize membres, à l’IAE Metz.</h2>
-          <p class="prose">OREKA réunit 13 étudiantes et étudiants en management et développement de systèmes hôteliers. Le groupe construit un réseau, invite des partenaires, et prépare le jour J.</p>
+          <p class="eyebrow" data-bind="projectEyebrow">Le projet</p>
+          <h2 id="oreka-title" data-bind="projectTitle">Treize membres, à l’IAE Metz.</h2>
+          <p class="prose" data-bind="projectBody">OREKA réunit 13 étudiantes et étudiants en management et développement de systèmes hôteliers. Le groupe construit un réseau, invite des partenaires, et prépare le jour J.</p>
         </div>
         <div class="reveal">
           <ul class="members">
@@ -163,11 +163,11 @@
         <div class="section-head reveal">
           <span class="index-no">02</span>
           <div>
-            <p class="eyebrow">Devenir partenaire</p>
-            <h2 id="partner-title">Un petit formulaire.</h2>
+            <p class="eyebrow" data-bind="formEyebrow">Devenir partenaire</p>
+            <h2 id="partner-title" data-bind="formTitle">Un petit formulaire.</h2>
           </div>
         </div>
-        <p class="prose reveal">Choisissez votre place, puis laissez un nom, un établissement et un e-mail.</p>
+        <p class="prose reveal" data-bind="formIntro">Choisissez votre place, puis laissez un nom, un établissement et un e-mail.</p>
 
         <form id="partner-form" action="#rejoindre" method="post" novalidate>
           <div id="form-alert" class="form-alert" role="alert" tabindex="-1" hidden></div>
@@ -240,9 +240,9 @@
     <div class="wrap footer-grid">
       <div>
         <a class="brand" href="#jour" aria-label="Oreka Metz">
-          <img src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
+          <img data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
         </a>
-        <p>Site officiel d’OREKA, projet de 13 étudiants de l’IAE Metz.</p>
+        <p data-bind="footer">Site officiel d’OREKA, projet de 13 étudiants de l’IAE Metz.</p>
       </div>
       <div>
         <p class="footer-label">Explorer</p>
@@ -259,6 +259,7 @@
   </footer>
 
   <script src="js/config.js" defer></script>
+  <script src="js/content.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>
