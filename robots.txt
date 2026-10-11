@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /oreka/reglages.html
+Disallow: /reglages.html
 
-Sitemap: https://siahmedalaa.github.io/oreka/sitemap.xml
+Sitemap: https://oreka-metz.github.io/sitemap.xml
