@@ -20,7 +20,7 @@
   <main id="gate" class="wrap gate">
     <p class="eyebrow">Collectif uniquement</p>
     <h1>Réglages</h1>
-    <p class="lede">Cette page n’est pas dans le menu du site. Elle sert à modifier le logo, les couleurs, les textes, les partenaires et la date du compte à rebours.</p>
+    <p class="lede">Cette page n’est pas dans le menu du site. Elle sert à modifier le logo, les couleurs, les textes, les membres, les partenaires et la date du compte à rebours.</p>
     <form id="gate-form">
       <div class="field">
         <label for="gate-code">Code d’accès</label>
@@ -97,6 +97,13 @@
           <label>Introduction du formulaire <textarea data-text="formIntro"></textarea></label>
           <label>Pied de page <input data-text="footer"></label>
         </div>
+      </section>
+
+      <section class="settings-card">
+        <h2>Membres du projet</h2>
+        <p class="help">Prénom, nom et rôle. Tant qu’un nom n’est pas publié, le site garde le numéro.</p>
+        <div id="member-list"></div>
+        <button class="btn btn-ghost" id="add-member" type="button">Ajouter un membre</button>
       </section>
 
       <section class="settings-card">

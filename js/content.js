@@ -20,12 +20,53 @@
     const texts = data.texts || {};
     document.querySelectorAll("[data-bind]").forEach(function (node) {
       const key = node.getAttribute("data-bind");
-      if (texts[key] != null) node.textContent = texts[key];
+      if (texts[key] != null && String(texts[key]).trim() !== "") node.textContent = texts[key];
     });
 
     if (data.logo) {
       document.querySelectorAll("[data-logo]").forEach(function (img) {
         img.src = data.logo;
+      });
+    }
+
+    const memberList = document.querySelector(".members");
+    if (memberList && Array.isArray(data.members)) {
+      memberList.replaceChildren();
+      data.members.forEach(function (item, index) {
+        const li = document.createElement("li");
+        const button = document.createElement("button");
+        button.type = "button";
+        const number = String(index + 1).padStart(2, "0");
+        const prenom = (item.prenom || "").trim();
+        const nom = (item.nom || "").trim();
+        const role = (item.role || "").trim();
+        const who = [prenom, nom].filter(Boolean).join(" ");
+        let label = "Membre " + number + " du projet, IAE Metz.";
+        if (who && role) label = who + ", " + role + ".";
+        else if (who) label = who + ", membre du projet, IAE Metz.";
+        else if (role) label = "Membre " + number + ", " + role + ".";
+        button.setAttribute("data-label", label);
+        button.setAttribute("aria-label", label);
+        if (who || role) {
+          button.classList.add("is-named");
+          const mark = document.createElement("span");
+          mark.className = "member-mark";
+          mark.textContent = number;
+          const name = document.createElement("span");
+          name.className = "member-name";
+          name.textContent = who || ("Membre " + number);
+          button.append(mark, name);
+          if (role) {
+            const roleNode = document.createElement("span");
+            roleNode.className = "member-role";
+            roleNode.textContent = role;
+            button.append(roleNode);
+          }
+        } else {
+          button.textContent = number;
+        }
+        li.appendChild(button);
+        memberList.appendChild(li);
       });
     }
 

@@ -10,7 +10,7 @@
   },
   "texts": {
     "eyebrow": "Jour J · avril 2027",
-    "countNote": "Date indicative : mardi 20 avril 2027. Le collectif confirmera le jour exact.",
+    "countNote": "Date indicative : avril 2027",
     "partnersEyebrow": "Partenaires",
     "partnersTitle": "Une liste qui tourne.",
     "partnersIntro": "Hôtels, restaurants et traiteurs pour le projet. Animateurs et DJ pour le jour de l’événement. Faites tourner la liste, ou choisissez une carte.",
@@ -23,6 +23,21 @@
     "formIntro": "Choisissez votre place, puis laissez un nom, un établissement et un e-mail.",
     "footer": "Site officiel d’OREKA, projet de 13 étudiants de l’IAE Metz."
   },
+  "members": [
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" },
+    { "prenom": "", "nom": "", "role": "" }
+  ],
   "partners": [
     {
       "name": "Hôtel",

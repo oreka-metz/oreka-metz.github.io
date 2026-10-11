@@ -87,10 +87,21 @@ input[type="color"] {
   background: #fff7fb;
 }
 
-.partner-edit .row {
+.partner-edit .row,
+.member-row {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 0.6rem;
+}
+
+.member-row { grid-template-columns: 1fr 1fr 1fr; }
+
+.member-no {
+  margin: 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pink-2);
 }
 
 .partner-tools {
@@ -127,6 +138,6 @@ input[type="color"] {
 .help { color: var(--muted); font-size: 0.95rem; }
 
 @media (max-width: 700px) {
-  .color-grid, .partner-edit .row, .editor-head { grid-template-columns: 1fr; }
+  .color-grid, .partner-edit .row, .member-row, .editor-head { grid-template-columns: 1fr; }
   .editor-head { display: grid; }
 }

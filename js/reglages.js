@@ -154,6 +154,65 @@
     return box;
   }
 
+  function renumberMembers() {
+    const cards = document.querySelectorAll(".member-edit");
+    Array.prototype.forEach.call(cards, function (box, index) {
+      const title = box.querySelector("[data-member-no]");
+      if (title) title.textContent = "Membre " + String(index + 1).padStart(2, "0");
+    });
+  }
+
+  function memberCard(item) {
+    const box = document.createElement("div");
+    box.className = "partner-edit member-edit";
+    box.innerHTML = ""
+      + "<p class=\"member-no\" data-member-no></p>"
+      + "<div class=\"member-row\">"
+      + "<label>Prénom <input data-m=\"prenom\" maxlength=\"40\" autocomplete=\"given-name\"></label>"
+      + "<label>Nom <input data-m=\"nom\" maxlength=\"40\" autocomplete=\"family-name\"></label>"
+      + "<label>Rôle <input data-m=\"role\" maxlength=\"80\"></label>"
+      + "</div>"
+      + "<div class=\"partner-tools\">"
+      + "<button class=\"mini\" type=\"button\" data-up>Monter</button>"
+      + "<button class=\"mini\" type=\"button\" data-down>Descendre</button>"
+      + "<button class=\"mini\" type=\"button\" data-remove>Supprimer</button>"
+      + "</div>";
+    box.querySelector('[data-m="prenom"]').value = item.prenom || "";
+    box.querySelector('[data-m="nom"]').value = item.nom || "";
+    box.querySelector('[data-m="role"]').value = item.role || "";
+    box.querySelector("[data-remove]").addEventListener("click", function () {
+      box.remove();
+      renumberMembers();
+      saveDraft();
+    });
+    box.querySelector("[data-up]").addEventListener("click", function () {
+      const prev = box.previousElementSibling;
+      if (prev) box.parentNode.insertBefore(box, prev);
+      renumberMembers();
+      saveDraft();
+    });
+    box.querySelector("[data-down]").addEventListener("click", function () {
+      const next = box.nextElementSibling;
+      if (next) box.parentNode.insertBefore(next, box);
+      renumberMembers();
+      saveDraft();
+    });
+    box.addEventListener("input", saveDraft);
+    return box;
+  }
+
+  function renderMembers(list) {
+    const root = document.getElementById("member-list");
+    const source = list && list.length ? list : Array.from({ length: 13 }, function () {
+      return { prenom: "", nom: "", role: "" };
+    });
+    root.replaceChildren();
+    source.forEach(function (item) {
+      root.appendChild(memberCard(item));
+    });
+    renumberMembers();
+  }
+
   function renderPartners(list) {
     const root = document.getElementById("partner-list");
     root.replaceChildren();
@@ -179,6 +238,7 @@
     const logo = document.getElementById("logo-preview");
     logo.src = data.logo || "assets/logo-officiel.png?v=2";
     logo.dataset.value = data.logo || "";
+    renderMembers(data.members);
     renderPartners(data.partners || []);
     document.documentElement.style.setProperty("--bg", colors.bg || "#fff7fb");
     document.documentElement.style.setProperty("--pink", colors.pink || "#f61c96");
@@ -196,7 +256,7 @@
     document.querySelectorAll("[data-text]").forEach(function (field) {
       texts[field.getAttribute("data-text")] = field.value.trim();
     });
-    const partners = Array.prototype.map.call(document.querySelectorAll(".partner-edit"), function (box) {
+    const partners = Array.prototype.map.call(document.querySelectorAll(".partner-edit:not(.member-edit)"), function (box) {
       return {
         name: box.querySelector('[data-p="name"]').value.trim(),
         group: box.querySelector('[data-p="group"]').value,
@@ -204,6 +264,13 @@
         photo: box.querySelector("[data-photo]").dataset.value || ""
       };
     }).filter(function (item) { return item.name; });
+    const members = Array.prototype.map.call(document.querySelectorAll(".member-edit"), function (box) {
+      return {
+        prenom: box.querySelector('[data-m="prenom"]').value.trim(),
+        nom: box.querySelector('[data-m="nom"]').value.trim(),
+        role: box.querySelector('[data-m="role"]').value.trim()
+      };
+    });
     const local = document.getElementById("field-countdown").value;
     return {
       logo: document.getElementById("logo-preview").dataset.value || site.logo,
@@ -216,6 +283,7 @@
         pink2: document.getElementById("color-pink2").value
       },
       texts: texts,
+      members: members,
       partners: partners
     };
   }
@@ -290,6 +358,16 @@
     const logo = document.getElementById("logo-preview");
     logo.src = data;
     logo.dataset.value = data;
+    saveDraft();
+  });
+
+  document.getElementById("add-member").addEventListener("click", function () {
+    document.getElementById("member-list").appendChild(memberCard({
+      prenom: "",
+      nom: "",
+      role: ""
+    }));
+    renumberMembers();
     saveDraft();
   });
 

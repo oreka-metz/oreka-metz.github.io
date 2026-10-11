@@ -150,17 +150,23 @@
   boot("members", function () {
     const caption = document.getElementById("member-caption");
     if (!caption) return;
-    document.querySelectorAll(".members button").forEach(function (button) {
-      function mark() {
-        document.querySelectorAll(".members button").forEach(function (other) {
-          other.classList.toggle("is-on", other === button);
-        });
-        caption.textContent = button.getAttribute("data-label");
-      }
-      button.addEventListener("mouseenter", mark);
-      button.addEventListener("focus", mark);
-      button.addEventListener("click", mark);
-    });
+    function bind() {
+      document.querySelectorAll(".members button").forEach(function (button) {
+        if (button.dataset.bound === "1") return;
+        button.dataset.bound = "1";
+        function mark() {
+          document.querySelectorAll(".members button").forEach(function (other) {
+            other.classList.toggle("is-on", other === button);
+          });
+          caption.textContent = button.getAttribute("data-label") || "";
+        }
+        button.addEventListener("mouseenter", mark);
+        button.addEventListener("focus", mark);
+        button.addEventListener("click", mark);
+      });
+    }
+    bind();
+    document.addEventListener("oreka-content", bind);
   });
 
   boot("network", function () {
