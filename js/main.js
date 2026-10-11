@@ -3,21 +3,19 @@
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const ROLES = {
-    entreprise: "entreprise",
-    association: "association",
-    institution: "institution",
-    mentor: "mentor",
-    relais: "relais",
-    lieu: "lieu d’accueil"
+    hotel: "hôtel",
+    restaurant: "restaurant",
+    traiteur: "traiteur",
+    animateur: "animateur",
+    dj: "DJ"
   };
 
-  const HELPS = {
-    reseau: "Mon réseau",
-    competence: "Une compétence",
-    lieu: "Un lieu",
-    visibilite: "De la visibilité",
-    soutien: "Un soutien matériel",
-    presence: "Ma présence le jour J"
+  const GROUPS = {
+    hotel: "du projet",
+    restaurant: "du projet",
+    traiteur: "du projet",
+    animateur: "du jour J",
+    dj: "du jour J"
   };
 
   function boot(name, fn) {
@@ -212,7 +210,7 @@
           x: cx + Math.cos(angle) * radius + ox,
           y: cy + Math.sin(angle) * radius * 0.86 + oy,
           r: Math.max(3.2, unit * 0.012),
-          c: i % 2 ? "#FA5BB2" : "#ffd0e8",
+          c: i % 2 ? "#FA5BB2" : "#F61C96",
           student: true,
           i: i
         });
@@ -224,7 +222,7 @@
           x: cx + Math.cos(-0.4) * radius * (0.35 + appear * 0.85),
           y: cy + Math.sin(-0.4) * radius * 0.86,
           r: Math.max(6, unit * 0.02),
-          c: "#ffffff",
+          c: "#d01278",
           partner: true
         });
       }
@@ -233,7 +231,7 @@
       for (let i = 0; i < 13; i += 1) {
         const a = nodes[2 + i];
         const b = nodes[2 + ((i + 1) % 13)];
-        ctx.strokeStyle = "rgba(255, 208, 232, 0.18)";
+        ctx.strokeStyle = "rgba(224, 19, 134, 0.28)";
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
@@ -247,7 +245,7 @@
 
       const partner = nodes.find(function (node) { return node.partner; });
       if (partner) {
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.55)";
+        ctx.strokeStyle = "rgba(209, 18, 120, 0.85)";
         ctx.beginPath();
         ctx.moveTo(partner.x, partner.y);
         ctx.lineTo(nodes[0].x, nodes[0].y);
@@ -268,7 +266,7 @@
       });
 
       if (partner && canvas.dataset.label) {
-        ctx.fillStyle = "#fff7fb";
+        ctx.fillStyle = "#2a1220";
         ctx.font = "600 13px Manrope, Segoe UI, sans-serif";
         ctx.textAlign = "center";
         ctx.fillText(canvas.dataset.label, partner.x, partner.y + partner.r + 16);
@@ -335,12 +333,6 @@
       return input ? input.value : "";
     }
 
-    function selectedHelps() {
-      return Array.prototype.slice.call(form.querySelectorAll('input[name="help"]:checked')).map(function (input) {
-        return HELPS[input.value] || input.value;
-      });
-    }
-
     function valueOf(id) {
       const el = document.getElementById(id);
       return el ? el.value.trim() : "";
@@ -348,14 +340,11 @@
 
     function refresh() {
       const role = selectedRole();
-      const helps = selectedHelps();
       const org = valueOf("structure");
       const bits = [];
-      if (!role) bits.push("Choisissez qui vous êtes. Une place s’ouvre alors dans le réseau.");
-      else bits.push("Profil : " + ROLES[role] + ".");
-      if (org) bits.push("Structure : " + org + ".");
-      if (role && !helps.length) bits.push("Indiquez au moins un apport.");
-      if (helps.length) bits.push("Apports : " + helps.join(", ") + ".");
+      if (!role) bits.push("Choisissez hôtel, restaurant, traiteur, animateur ou DJ.");
+      else bits.push("Partenaire " + GROUPS[role] + " : " + ROLES[role] + ".");
+      if (org) bits.push("Établissement : " + org + ".");
       if (sentence) sentence.textContent = bits.join(" ");
       if (status) status.textContent = role ? "Place esquissée" : "En attente";
       [canvas, document.getElementById("hero-net")].forEach(function (board) {
@@ -387,22 +376,15 @@
 
     function validate() {
       const problems = [];
-      const roleOk = showError("role-set", selectedRole() ? "" : "Choisissez un profil.");
-      if (!roleOk) problems.push(["role-set", "Choisir un profil"]);
-      const helpOk = showError("help-set", selectedHelps().length ? "" : "Choisissez au moins un apport.");
-      if (!helpOk) problems.push(["help-set", "Choisir un apport"]);
+      const roleOk = showError("role-set", selectedRole() ? "" : "Choisissez un type de partenaire.");
+      if (!roleOk) problems.push(["role-set", "Choisir un type"]);
       const nom = valueOf("nom");
       if (!showError("nom", nom.length >= 2 ? "" : "Indiquez votre nom.")) problems.push(["nom", "Nom"]);
       const structure = valueOf("structure");
-      if (!showError("structure", structure.length >= 2 ? "" : "Indiquez votre structure.")) problems.push(["structure", "Structure"]);
+      if (!showError("structure", structure.length >= 2 ? "" : "Indiquez l’établissement.")) problems.push(["structure", "Établissement"]);
       const email = valueOf("email");
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       if (!showError("email", emailOk ? "" : "Indiquez un e-mail valide.")) problems.push(["email", "E-mail"]);
-      const phone = valueOf("telephone");
-      const phoneOk = phone === "" || /^[+0-9][0-9 .\-()]{5,}$/.test(phone);
-      if (!showError("telephone", phoneOk ? "" : "Le téléphone semble incomplet.")) problems.push(["telephone", "Téléphone"]);
-      const message = valueOf("message");
-      if (!showError("message", message.length >= 20 ? "" : "Écrivez au moins quelques lignes.")) problems.push(["message", "Message"]);
       const consent = document.getElementById("consent");
       const consentOk = consent && consent.checked;
       showError("consent", consentOk ? "" : "Confirmez l’usage de ces informations.");
@@ -432,29 +414,29 @@
     function compose() {
       const role = ROLES[selectedRole()] || "";
       const when = new Date().toLocaleDateString("fr-FR", { dateStyle: "long" });
-      return [
+      const lines = [
         "Demande de partenariat — OREKA",
         "Date : " + when,
         "Nom : " + valueOf("nom"),
-        "Structure : " + valueOf("structure"),
-        "Profil : " + role,
-        "Apports : " + (selectedHelps().join(", ") || "—"),
-        "E-mail : " + valueOf("email"),
-        "Téléphone : " + (valueOf("telephone") || "—"),
-        "",
-        valueOf("message")
-      ].join("\n");
+        "Établissement : " + valueOf("structure"),
+        "Place : partenaire " + (GROUPS[selectedRole()] || ""),
+        "Type : " + role,
+        "E-mail : " + valueOf("email")
+      ];
+      if (valueOf("message")) {
+        lines.push("");
+        lines.push(valueOf("message"));
+      }
+      return lines.join("\n");
     }
 
     function saveDraft() {
       try {
         const data = {
           role: selectedRole(),
-          helps: Array.prototype.slice.call(form.querySelectorAll('input[name="help"]:checked')).map(function (input) { return input.value; }),
           nom: valueOf("nom"),
           structure: valueOf("structure"),
           email: valueOf("email"),
-          telephone: valueOf("telephone"),
           message: valueOf("message"),
           consent: document.getElementById("consent").checked
         };
@@ -471,11 +453,7 @@
           const radio = form.querySelector('input[name="role"][value="' + data.role + '"]');
           if (radio) radio.checked = true;
         }
-        (data.helps || []).forEach(function (value) {
-          const box = form.querySelector('input[name="help"][value="' + value + '"]');
-          if (box) box.checked = true;
-        });
-        ["nom", "structure", "email", "telephone", "message"].forEach(function (id) {
+        ["nom", "structure", "email", "message"].forEach(function (id) {
           const el = document.getElementById(id);
           if (el && data[id]) el.value = data[id];
         });
@@ -509,8 +487,7 @@
           email: valueOf("email"),
           structure: valueOf("structure"),
           profil: ROLES[selectedRole()] || "",
-          apports: selectedHelps().join(", "),
-          telephone: valueOf("telephone"),
+          place: GROUPS[selectedRole()] || "",
           message: text,
           _subject: "Partenariat OREKA — " + valueOf("structure"),
           _template: "table",
