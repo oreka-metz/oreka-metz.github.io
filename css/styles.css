@@ -168,7 +168,7 @@ body.nav-open { overflow: hidden; }
   text-decoration: none;
 }
 
-.brand img { width: 156px; height: auto; }
+.brand img { height: 62px; width: auto; }
 .brand-name {
   display: flex;
   flex-direction: column;
@@ -860,9 +860,9 @@ fieldset {
 }
 
 .hero-logo {
-  width: min(680px, 92vw);
+  width: min(540px, 88vw);
   height: auto;
-  margin: 0 auto 0.4rem;
+  margin: 0 auto 0.2rem;
 }
 
 .hero-open .eyebrow { margin-top: 0.6rem; }
@@ -1016,7 +1016,7 @@ legend {
 }
 
 @media (max-width: 700px) {
-  .brand img { width: 118px; }
+  .brand img { height: 48px; width: auto; }
   .count { gap: 0.4rem; }
   .count div { padding: 0.7rem 0.25rem 0.55rem; }
   .count span { letter-spacing: 0.04em; font-size: 0.64rem; }
