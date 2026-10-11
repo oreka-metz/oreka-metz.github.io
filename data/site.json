@@ -1,6 +1,6 @@
 {
   "logo": "assets/logo-officiel.png?v=2",
-  "countdown": "2027-03-20T18:00:00+01:00",
+  "countdown": "2027-04-20T18:00:00+02:00",
   "colors": {
     "bg": "#fff7fb",
     "ink": "#2a1220",
@@ -9,16 +9,13 @@
     "pink2": "#d01278"
   },
   "texts": {
-    "eyebrow": "Jour J · mars 2027",
-    "countNote": "Date indicative : samedi 20 mars 2027. Le collectif confirmera le jour exact.",
-    "partnersEyebrow": "Partenaires",
+    "eyebrow": "Jour J · avril 2027",
+    "countNote": "Date indicative : mardi 20 avril 2027. Le collectif confirmera le jour exact.",
     "partnersTitle": "Une liste qui tourne.",
     "partnersIntro": "Hôtels, restaurants et traiteurs pour le projet. Animateurs et DJ pour le jour de l’événement. Faites tourner la liste, ou choisissez une carte.",
     "partnersHint": "Dès qu’un partenaire confirme, son nom ou son logo prend la place de la carte.",
-    "projectEyebrow": "Le projet",
     "projectTitle": "Treize membres, à l’IAE Metz.",
     "projectBody": "OREKA réunit 13 étudiantes et étudiants en management et développement de systèmes hôteliers. Le groupe construit un réseau, invite des partenaires, et prépare le jour J.",
-    "formEyebrow": "Devenir partenaire",
     "formTitle": "Un petit formulaire.",
     "formIntro": "Choisissez votre place, puis laissez un nom, un établissement et un e-mail.",
     "footer": "Site officiel d’OREKA, projet de 13 étudiants de l’IAE Metz."
