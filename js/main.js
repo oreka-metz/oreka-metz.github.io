@@ -707,7 +707,9 @@
           _captcha: "false"
         })
       });
-      return response.ok;
+      if (!response.ok) return false;
+      const data = await response.json().catch(function () { return {}; });
+      return data.success === true || data.success === "true";
     }
 
     restoreDraft();
