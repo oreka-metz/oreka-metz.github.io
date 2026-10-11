@@ -315,6 +315,185 @@
     canvas._redraw = function () { draw(performance.now()); kick(); };
   }
 
+  boot("countdown", function () {
+    const root = document.querySelector("[data-countdown]");
+    if (!root) return;
+    const target = new Date("2027-03-20T18:00:00+01:00").getTime();
+    const units = {
+      days: root.querySelector('[data-count="days"]'),
+      hours: root.querySelector('[data-count="hours"]'),
+      minutes: root.querySelector('[data-count="minutes"]'),
+      seconds: root.querySelector('[data-count="seconds"]')
+    };
+    const live = document.getElementById("count-live");
+    let lastSpoken = "";
+
+    function pad(value) {
+      return String(value).padStart(2, "0");
+    }
+
+    function tick() {
+      let diff = target - Date.now();
+      if (diff < 0) diff = 0;
+      const total = Math.floor(diff / 1000);
+      const days = Math.floor(total / 86400);
+      const hours = Math.floor((total % 86400) / 3600);
+      const minutes = Math.floor((total % 3600) / 60);
+      const seconds = total % 60;
+      if (units.days) units.days.textContent = String(days);
+      if (units.hours) units.hours.textContent = pad(hours);
+      if (units.minutes) units.minutes.textContent = pad(minutes);
+      if (units.seconds) units.seconds.textContent = pad(seconds);
+      const spoken = diff === 0
+        ? "La date indicative du jour J est atteinte."
+        : days + " jours, " + hours + " heures et " + minutes + " minutes avant le jour J, date indicative du 20 mars 2027.";
+      if (live && spoken !== lastSpoken && (seconds === 0 || lastSpoken === "")) {
+        live.textContent = spoken;
+        lastSpoken = spoken;
+      }
+    }
+
+    tick();
+    window.setInterval(tick, 1000);
+  });
+
+  boot("reel", function () {
+    const root = document.querySelector("[data-reel]");
+    if (!root) return;
+    const stage = root.querySelector(".reel-stage");
+    const cards = Array.prototype.slice.call(root.querySelectorAll("[data-card]"));
+    const detail = document.getElementById("reel-detail");
+    const n = cards.length;
+    if (!stage || !n) return;
+    const step = 360 / n;
+    let angle = 0;
+    let target = 0;
+    let dragging = false;
+    let paused = false;
+    let visible = true;
+    let lastX = 0;
+    let holdUntil = 0;
+
+    function hold() {
+      holdUntil = performance.now() + 3200;
+    }
+
+    function nearest(desired) {
+      const turns = Math.round((target - desired) / 360);
+      return desired + turns * 360;
+    }
+
+    function frontIndex(value) {
+      let best = 0;
+      let bestCos = -2;
+      for (let i = 0; i < n; i += 1) {
+        const depth = Math.cos((value + i * step) * Math.PI / 180);
+        if (depth > bestCos) {
+          bestCos = depth;
+          best = i;
+        }
+      }
+      return best;
+    }
+
+    function render() {
+      const radius = Math.max(168, Math.min(430, stage.clientWidth * 0.4));
+      const front = frontIndex(angle);
+      cards.forEach(function (card, i) {
+        const theta = (angle + i * step) * Math.PI / 180;
+        const depth = Math.cos(theta);
+        const x = Math.sin(theta) * radius;
+        const scale = depth > 0.85 ? 1 : 0.84;
+        const opacity = depth < 0.12 ? 0 : Math.min(1, (depth - 0.12) / 0.88);
+        card.style.transform = "translate(-50%, -50%) translateX(" + x.toFixed(1) + "px) scale(" + scale.toFixed(3) + ")";
+        card.style.opacity = opacity.toFixed(3);
+        card.style.zIndex = String(Math.round((depth + 1) * 40));
+        card.style.pointerEvents = depth < 0.2 ? "none" : "auto";
+        const on = i === front;
+        card.classList.toggle("is-front", on);
+        card.tabIndex = on ? 0 : -1;
+      });
+      if (detail) detail.textContent = cards[front].getAttribute("data-detail") || "";
+    }
+
+    function frame(now) {
+      if (visible && !dragging && !paused && !reduced) {
+        if (!holdUntil) holdUntil = now + 2800;
+        if (now >= holdUntil) {
+          target -= step;
+          holdUntil = now + 2800;
+        }
+      }
+      angle += (target - angle) * (reduced ? 1 : 0.08);
+      if (Math.abs(target - angle) < 0.04) angle = target;
+      render();
+      window.requestAnimationFrame(frame);
+    }
+
+    const prev = root.querySelector("[data-prev]");
+    const next = root.querySelector("[data-next]");
+    if (prev) prev.addEventListener("click", function () { target += step; hold(); });
+    if (next) next.addEventListener("click", function () { target -= step; hold(); });
+
+    cards.forEach(function (card, i) {
+      card.addEventListener("click", function () {
+        target = nearest(-i * step);
+        hold();
+      });
+    });
+
+    stage.addEventListener("pointerdown", function (event) {
+      if (event.target.closest(".reel-arrow")) return;
+      dragging = true;
+      paused = true;
+      lastX = event.clientX;
+      if (stage.setPointerCapture) stage.setPointerCapture(event.pointerId);
+    });
+    stage.addEventListener("pointermove", function (event) {
+      if (!dragging) return;
+      const dx = event.clientX - lastX;
+      lastX = event.clientX;
+      target += dx * 0.42;
+      angle = target;
+      hold();
+    });
+    function endDrag() {
+      dragging = false;
+      paused = false;
+    }
+    stage.addEventListener("pointerup", endDrag);
+    stage.addEventListener("pointercancel", endDrag);
+
+    root.addEventListener("mouseenter", function () { paused = true; });
+    root.addEventListener("mouseleave", function () {
+      if (!dragging) paused = false;
+    });
+    root.addEventListener("focusin", function () { paused = true; });
+    root.addEventListener("focusout", function (event) {
+      if (!root.contains(event.relatedTarget)) paused = false;
+    });
+    root.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        target -= step;
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        target += step;
+      }
+    });
+
+    if ("IntersectionObserver" in window) {
+      const watch = new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+      });
+      watch.observe(root);
+    }
+
+    render();
+    window.requestAnimationFrame(frame);
+  });
+
   boot("form", function () {
     const form = document.getElementById("partner-form");
     if (!form) return;
