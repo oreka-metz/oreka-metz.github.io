@@ -325,7 +325,11 @@
     });
     if (!saved.ok) {
       const detail = await saved.json().catch(function () { return {}; });
-      throw new Error(detail.message || ("Publication impossible (" + saved.status + ")."));
+      const message = detail.message || "";
+      if (/not accessible by personal access token/i.test(message)) {
+        throw new Error("Ce jeton n’a pas le droit d’écrire. Ouvrez-le et mettez Contents sur Read and write, ou créez un jeton classique avec le droit repo, puis collez le nouveau jeton.");
+      }
+      throw new Error(message || ("Publication impossible (" + saved.status + ")."));
     }
   }
 

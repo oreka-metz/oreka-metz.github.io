@@ -102,11 +102,11 @@
 
       <section class="settings-card">
         <h2>Publication</h2>
-        <p class="help">L’aperçu reste dans ce navigateur. Pour que tout le monde voie les changements, publiez avec un jeton GitHub du compte qui possède le dépôt. Le jeton n’est pas enregistré dans le site : il reste dans ce navigateur.</p>
+        <p class="help">L’aperçu reste dans ce navigateur. Pour publier, le jeton doit pouvoir écrire dans le dépôt <strong>oreka-metz.github.io</strong>. Il reste dans ce navigateur : il n’est pas enregistré dans le site.</p>
         <ol class="help">
-          <li><a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener">GitHub → Settings → Developer settings → Personal access tokens</a>.</li>
-          <li>Jeton classique avec le droit <strong>repo</strong>, ou jeton fin limité au dépôt <strong>oreka-metz.github.io</strong>, contenu en lecture et écriture. Les jetons classiques sont sur <a href="https://github.com/settings/tokens" target="_blank" rel="noopener">cette page</a>.</li>
-          <li>Collez-le ici, puis publiez. Le site public se met à jour en une minute environ.</li>
+          <li>Le plus simple : <a href="https://github.com/settings/tokens/new?scopes=repo&description=OREKA" target="_blank" rel="noopener">créer un jeton classique</a>. Le droit <strong>repo</strong> est déjà coché. Générez-le, copiez-le tout de suite, puis collez-le ci-dessous.</li>
+          <li>Avec un jeton fin (<a href="https://github.com/settings/personal-access-tokens" target="_blank" rel="noopener">GitHub → Settings → Developer settings → Personal access tokens</a>) : propriétaire <strong>oreka-metz</strong>, dépôt <strong>oreka-metz.github.io</strong>, permission <strong>Contents</strong> sur <strong>Read and write</strong>. Lecture seule donne l’erreur « Resource not accessible by personal access token ».</li>
+          <li>Collez le nouveau jeton, puis publiez. Le site public se met à jour en une minute environ.</li>
         </ol>
         <div class="field">
           <label for="token">Jeton GitHub</label>
