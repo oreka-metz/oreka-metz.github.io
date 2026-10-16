@@ -10,15 +10,15 @@
   },
   "texts": {
     "eyebrow": "Jour J · mars 2027",
-    "countNote": "Date indicative : jeudi 11 mars 2027. Le collectif confirmera le jour exact.",
-    "partnersTitle": "Une liste qui tourne.",
-    "partnersIntro": "Hôtels, restaurants et traiteurs pour le projet. Animateurs et DJ pour le jour de l’événement. Faites tourner la liste, ou choisissez une carte.",
-    "partnersHint": "Dès qu’un partenaire confirme, son nom ou son logo prend la place de la carte.",
-    "projectTitle": "Treize membres, à l’IAE Metz.",
-    "projectBody": "OREKA réunit 13 étudiantes et étudiants en management et développement de systèmes hôteliers. Le groupe construit un réseau, invite des partenaires, et prépare le jour J.",
-    "formTitle": "Un petit formulaire.",
+    "countNote": "jeudi 11 mars 2027",
+    "partnersTitle": "Nos Partenaire",
+    "partnersIntro": "",
+    "partnersHint": "",
+    "projectTitle": "10 membres, à l’IAE Metz.",
+    "projectBody": "OREKA réunit 10 étudiantes et étudiants en management et développement de systèmes hôteliers. Le groupe construit un réseau, invite des partenaires, et prépare le jour J.",
+    "formTitle": "Devenir notre partenaire",
     "formIntro": "Choisissez votre place, puis laissez un nom, un établissement et un e-mail.",
-    "footer": "Site officiel d’OREKA, projet de 13 étudiants de l’IAE Metz.",
+    "footer": "Site officiel d’OREKA",
     "partnersEyebrow": "",
     "projectEyebrow": "",
     "formEyebrow": ""
@@ -32,42 +32,42 @@
     {
       "prenom": "Clara",
       "nom": "KAHINDO",
-      "role": "Finance"
+      "role": "Trésorière"
     },
     {
       "prenom": "Sara",
       "nom": "SADEGHI",
-      "role": "communication et logistique"
+      "role": "Chargée communication et logistique"
     },
     {
       "prenom": "Mouna",
       "nom": "MOSSI",
-      "role": "Chargée de relations entreprises & clients"
+      "role": "Chargée relations entreprises & clients"
     },
     {
       "prenom": "Nassim",
       "nom": "HEBBADJ",
-      "role": "chargé de logistique"
+      "role": "Chargé de logistique"
     },
     {
       "prenom": "Serhii",
       "nom": "DIDIICHUK",
-      "role": "Finance"
+      "role": "Trésorier"
     },
     {
       "prenom": "Walid",
       "nom": "BENYGHZER",
-      "role": "Finance et budget"
+      "role": "Trésorier"
     },
     {
       "prenom": "Mrine",
       "nom": "FERERA",
-      "role": "Chargée de partenariat et sponsor"
+      "role": "Chargée relations entreprises & clients"
     },
     {
       "prenom": "Alaa",
       "nom": "SIAHMED",
-      "role": "chargé de logistique"
+      "role": "Chargé de logistique"
     },
     {
       "prenom": "San",
@@ -77,34 +77,10 @@
   ],
   "partners": [
     {
-      "name": "Hôtel",
+      "name": "LA CITADELLE",
       "group": "Pour le projet",
-      "detail": "Un hôtel peut accompagner les 13 membres pour réaliser le projet.",
-      "photo": ""
-    },
-    {
-      "name": "Restaurant",
-      "group": "Pour le projet",
-      "detail": "Un restaurant peut rejoindre le réseau et aider à porter le projet.",
-      "photo": ""
-    },
-    {
-      "name": "Traiteur",
-      "group": "Pour le projet",
-      "detail": "Un traiteur peut prendre part à la réalisation du projet.",
-      "photo": ""
-    },
-    {
-      "name": "Animateur",
-      "group": "Pour le jour J",
-      "detail": "Un animateur rejoint OREKA pour faire vivre le jour de l’événement.",
-      "photo": ""
-    },
-    {
-      "name": "DJ",
-      "group": "Pour le jour J",
-      "detail": "Un DJ rejoint OREKA pour le jour de l’événement.",
-      "photo": ""
+      "detail": "Hôtel",
+      "photo": "assets/uploads/partenaire-1792151028005-0.jpg?v=1792151029692"
     }
   ]
 }
