@@ -5,6 +5,39 @@
   const editor = document.getElementById("editor");
   const status = document.getElementById("status");
   let site = null;
+  const COLOR_DEFAULTS = window.OREKA_COLOR_DEFAULTS || {};
+
+  function buildTextFields() {
+    const root = document.getElementById("text-groups");
+    const groups = window.OREKA_TEXT_GROUPS || [];
+    if (!root || root.childElementCount) return;
+    groups.forEach(function (group) {
+      const section = document.createElement("section");
+      section.className = "settings-card";
+      const title = document.createElement("h2");
+      title.textContent = group.title;
+      section.appendChild(title);
+      if (group.help) {
+        const help = document.createElement("p");
+        help.className = "help";
+        help.textContent = group.help;
+        section.appendChild(help);
+      }
+      const stack = document.createElement("div");
+      stack.className = "stack";
+      group.fields.forEach(function (field) {
+        const label = document.createElement("label");
+        label.appendChild(document.createTextNode(field[1]));
+        const input = document.createElement(field[3] ? "textarea" : "input");
+        input.setAttribute("data-text", field[0]);
+        input.dataset.default = field[2];
+        label.appendChild(input);
+        stack.appendChild(label);
+      });
+      section.appendChild(stack);
+      root.appendChild(section);
+    });
+  }
 
   function showStatus(message) {
     status.hidden = false;
@@ -227,21 +260,19 @@
     document.getElementById("field-countdown").value = local;
     document.querySelectorAll("[data-text]").forEach(function (field) {
       const key = field.getAttribute("data-text");
-      field.value = (data.texts && data.texts[key]) || "";
+      if (data.texts && Object.prototype.hasOwnProperty.call(data.texts, key)) field.value = data.texts[key];
+      else field.value = field.dataset.default || "";
     });
     const colors = data.colors || {};
-    document.getElementById("color-bg").value = colors.bg || "#fff7fb";
-    document.getElementById("color-ink").value = colors.ink || "#2a1220";
-    document.getElementById("color-muted").value = colors.muted || "#5c3a4a";
-    document.getElementById("color-pink").value = colors.pink || "#f61c96";
-    document.getElementById("color-pink2").value = colors.pink2 || "#d01278";
+    document.querySelectorAll("[data-color]").forEach(function (field) {
+      const key = field.getAttribute("data-color");
+      field.value = colors[key] || field.dataset.default || COLOR_DEFAULTS[key] || "#000000";
+    });
     const logo = document.getElementById("logo-preview");
     logo.src = data.logo || "assets/logo-officiel.png?v=2";
     logo.dataset.value = data.logo || "";
     renderMembers(data.members);
     renderPartners(data.partners || []);
-    document.documentElement.style.setProperty("--bg", colors.bg || "#fff7fb");
-    document.documentElement.style.setProperty("--pink", colors.pink || "#f61c96");
   }
 
   function rememberToken(token) {
@@ -271,17 +302,15 @@
         role: box.querySelector('[data-m="role"]').value.trim()
       };
     });
+    const colors = Object.assign({}, COLOR_DEFAULTS);
+    document.querySelectorAll("[data-color]").forEach(function (field) {
+      colors[field.getAttribute("data-color")] = field.value;
+    });
     const local = document.getElementById("field-countdown").value;
     return {
       logo: document.getElementById("logo-preview").dataset.value || site.logo,
       countdown: local ? parisISO(local) : site.countdown,
-      colors: {
-        bg: document.getElementById("color-bg").value,
-        ink: document.getElementById("color-ink").value,
-        muted: document.getElementById("color-muted").value,
-        pink: document.getElementById("color-pink").value,
-        pink2: document.getElementById("color-pink2").value
-      },
+      colors: colors,
       texts: texts,
       members: members,
       partners: partners
@@ -299,6 +328,7 @@
   async function openEditor() {
     gate.hidden = true;
     editor.hidden = false;
+    buildTextFields();
     let data = null;
     try {
       const raw = localStorage.getItem("oreka-draft");

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="no-js">
+<html lang="fr" class="no-js" data-title="pageTitle">
 <head>
   <script>
     if (location.hostname === "siahmedalaa.github.io") {
@@ -10,29 +10,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OREKA — Projet hôtelier de l’IAE Metz</title>
-  <meta name="description" content="Site officiel d’OREKA, 13 étudiantes et étudiants de l’IAE Metz en management et développement de systèmes hôteliers. Compte à rebours du jour J, partenaires et formulaire.">
+  <meta name="description" data-bind-content="metaDescription" content="Site officiel d’OREKA, 13 étudiantes et étudiants de l’IAE Metz en management et développement de systèmes hôteliers. Compte à rebours du jour J, partenaires et formulaire.">
   <meta name="author" content="Collectif OREKA">
   <meta name="theme-color" content="#fff7fb">
   <link rel="canonical" href="https://oreka-metz.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="OREKA">
-  <meta property="og:title" content="OREKA — Le jour J, les partenaires">
-  <meta property="og:description" content="13 étudiants de l’IAE Metz. Jour J indicatif le 20 avril 2027. Hôtels, restaurants, traiteurs, animateurs et DJ.">
+  <meta property="og:title" data-bind-content="ogTitle" content="OREKA — Le jour J, les partenaires">
+  <meta property="og:description" data-bind-content="ogDescription" content="13 étudiants de l’IAE Metz. Jour J indicatif le 20 avril 2027. Hôtels, restaurants, traiteurs, animateurs et DJ.">
   <meta property="og:url" content="https://oreka-metz.github.io/">
   <meta property="og:image" content="https://oreka-metz.github.io/assets/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="OREKA — Metz">
-  <meta name="twitter:description" content="OREKA, projet de l’IAE Metz. Jour J indicatif le 20 avril 2027, partenaires et formulaire.">
+  <meta name="twitter:title" data-bind-content="twitterTitle" content="OREKA — Metz">
+  <meta name="twitter:description" data-bind-content="twitterDescription" content="OREKA, projet de l’IAE Metz. Jour J indicatif le 20 avril 2027, partenaires et formulaire.">
   <meta name="twitter:image" content="https://oreka-metz.github.io/assets/og.png">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="css/styles.css">
   <script>document.documentElement.classList.replace("no-js","js");</script>
-  <script type="application/ld+json">
+  <script id="site-ld" type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -49,22 +49,22 @@
   </script>
 </head>
 <body>
-  <a class="skip" href="#contenu">Aller au contenu</a>
+  <a class="skip" href="#contenu" data-bind="skipLink">Aller au contenu</a>
   <div class="scroll-progress" aria-hidden="true"></div>
-  <noscript><p class="noscript">Le texte du site reste lisible. Activez JavaScript pour le compte à rebours, la liste des partenaires et le formulaire.</p></noscript>
+  <noscript><p class="noscript" data-bind="noscript">Le texte du site reste lisible. Activez JavaScript pour le compte à rebours, la liste des partenaires et le formulaire.</p></noscript>
 
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="#jour" aria-label="Oreka Metz">
+      <a class="brand" href="#jour" aria-label="Oreka Metz" data-bind-aria="brandLabel">
         <img data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav" class="site-nav" aria-label="Navigation principale">
-        <a class="nav-link" href="#jour">Jour J</a>
-        <a class="nav-link" href="#partenaires">Partenaires</a>
-        <a class="nav-link" href="#oreka">OREKA</a>
-        <a href="mentions.html">Mentions</a>
-        <a class="nav-cta" href="#rejoindre">Devenir partenaire</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-bind="navMenu">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Navigation principale" data-bind-aria="navAria">
+        <a class="nav-link" href="#jour" data-bind="navJour">Jour J</a>
+        <a class="nav-link" href="#partenaires" data-bind="navPartners">Partenaires</a>
+        <a class="nav-link" href="#oreka" data-bind="navProject">OREKA</a>
+        <a href="mentions.html" data-bind="navMentions">Mentions</a>
+        <a class="nav-cta" href="#rejoindre" data-bind="navCta">Devenir partenaire</a>
       </nav>
     </div>
   </header>
@@ -72,20 +72,20 @@
   <main id="contenu">
     <section class="hero" id="jour" aria-labelledby="hero-title">
       <div class="wrap hero-open">
-        <h1 id="hero-title" class="sr">Oreka Metz, compte à rebours du jour J</h1>
-        <img class="hero-logo" data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
+        <h1 id="hero-title" class="sr" data-bind="heroTitle">Oreka Metz, compte à rebours du jour J</h1>
+        <img class="hero-logo" data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="OREKA" data-bind-alt="heroLogoAlt">
         <p class="eyebrow" data-bind="eyebrow">Jour J · avril 2027</p>
         <div class="count" data-countdown aria-hidden="true">
-          <div><strong data-count="days">00</strong><span>jours</span></div>
-          <div><strong data-count="hours">00</strong><span>heures</span></div>
-          <div><strong data-count="minutes">00</strong><span>minutes</span></div>
-          <div><strong data-count="seconds">00</strong><span>secondes</span></div>
+          <div><strong data-count="days">00</strong><span data-bind="unitDays">jours</span></div>
+          <div><strong data-count="hours">00</strong><span data-bind="unitHours">heures</span></div>
+          <div><strong data-count="minutes">00</strong><span data-bind="unitMinutes">minutes</span></div>
+          <div><strong data-count="seconds">00</strong><span data-bind="unitSeconds">secondes</span></div>
         </div>
         <p class="sr" id="count-live" aria-live="polite"></p>
-        <p class="count-note" data-bind="countNote">Date indicative : mardi 20 avril 2027. Le collectif confirmera le jour exact.</p>
+        <p class="count-note" data-bind="countNote">Date indicative : avril 2027</p>
         <div class="actions">
-          <a class="btn btn-primary" href="#rejoindre">Devenir partenaire</a>
-          <a class="btn btn-ghost" href="#oreka">Lire la présentation</a>
+          <a class="btn btn-primary" href="#rejoindre" data-bind="heroCta">Devenir partenaire</a>
+          <a class="btn btn-ghost" href="#oreka" data-bind="heroSecondary">Lire la présentation</a>
         </div>
       </div>
     </section>
@@ -93,14 +93,14 @@
     <section class="section" id="partenaires" aria-labelledby="partners-title">
       <div class="wrap">
         <div class="section-head reveal">
-          <span class="index-no">01</span>
+          <span class="index-no" data-bind="sectionIndex1">01</span>
           <div>
             <p class="eyebrow" data-bind="partnersEyebrow">Partenaires</p>
             <h2 id="partners-title" data-bind="partnersTitle">Une liste qui tourne.</h2>
           </div>
         </div>
         <p class="prose reveal" data-bind="partnersIntro">Hôtels, restaurants et traiteurs pour le projet. Animateurs et DJ pour le jour de l’événement. Faites tourner la liste, ou choisissez une carte.</p>
-        <div class="reel reveal" data-reel aria-roledescription="carrousel" aria-label="Partenaires">
+        <div class="reel reveal" data-reel aria-roledescription="carrousel" data-bind-roledescription="reelRole" aria-label="Partenaires" data-bind-aria="reelLabel">
           <div class="reel-stage">
             <button type="button" class="reel-card" data-card data-detail="Un hôtel peut accompagner les 13 membres pour réaliser le projet.">
               <span class="reel-kicker">Pour le projet</span>
@@ -124,10 +124,10 @@
             </button>
           </div>
           <div class="reel-nav">
-            <button class="reel-arrow" type="button" data-prev aria-label="Partenaire précédent">‹</button>
-            <button class="reel-arrow" type="button" data-next aria-label="Partenaire suivant">›</button>
+            <button class="reel-arrow" type="button" data-prev aria-label="Partenaire précédent" data-bind-aria="reelPrev">‹</button>
+            <button class="reel-arrow" type="button" data-next aria-label="Partenaire suivant" data-bind-aria="reelNext">›</button>
           </div>
-          <p class="reel-detail" id="reel-detail">Choisissez une carte, ou laissez la liste tourner.</p>
+          <p class="reel-detail" id="reel-detail" data-bind="reelEmpty">Choisissez une carte, ou laissez la liste tourner.</p>
           <p class="hint reel-hint" data-bind="partnersHint">Dès qu’un partenaire confirme, son nom ou son logo prend la place de la carte.</p>
         </div>
       </div>
@@ -156,7 +156,7 @@
             <li><button type="button" data-label="Membre 12 du projet, IAE Metz." aria-label="Membre 12 du projet, IAE Metz">12</button></li>
             <li><button type="button" data-label="Membre 13 du projet, IAE Metz." aria-label="Membre 13 du projet, IAE Metz">13</button></li>
           </ul>
-          <p class="member-caption" id="member-caption" aria-hidden="true">13 membres du projet, IAE Metz.</p>
+          <p class="member-caption" id="member-caption" aria-hidden="true" data-bind="memberCaption">13 membres du projet, IAE Metz.</p>
         </div>
       </div>
     </section>
@@ -164,7 +164,7 @@
     <section class="section" id="rejoindre" aria-labelledby="partner-title">
       <div class="wrap form-compact">
         <div class="section-head reveal">
-          <span class="index-no">02</span>
+          <span class="index-no" data-bind="sectionIndex2">02</span>
           <div>
             <p class="eyebrow" data-bind="formEyebrow">Devenir partenaire</p>
             <h2 id="partner-title" data-bind="formTitle">Un petit formulaire.</h2>
@@ -176,68 +176,68 @@
           <div id="form-alert" class="form-alert" role="alert" tabindex="-1" hidden></div>
           <div id="form-body">
             <p class="hp-field" aria-hidden="true">
-              <label for="company">Société</label>
+              <label for="company" data-bind="honeypotLabel">Société</label>
               <input id="company" name="_honey" type="text" tabindex="-1" autocomplete="off">
             </p>
             <fieldset id="role-set" tabindex="-1">
-              <legend>Vous êtes</legend>
-              <p class="group-label">Pour le projet</p>
+              <legend data-bind="roleLegend">Vous êtes</legend>
+              <p class="group-label" data-bind="roleGroupProject">Pour le projet</p>
               <div class="choices choices-inline">
-                <label class="choice choice-simple"><input type="radio" name="role" value="hotel"><span><strong>Hôtel</strong></span></label>
-                <label class="choice choice-simple"><input type="radio" name="role" value="restaurant"><span><strong>Restaurant</strong></span></label>
-                <label class="choice choice-simple"><input type="radio" name="role" value="traiteur"><span><strong>Traiteur</strong></span></label>
+                <label class="choice choice-simple"><input type="radio" name="role" value="hotel"><span><strong data-bind="roleHotel">Hôtel</strong></span></label>
+                <label class="choice choice-simple"><input type="radio" name="role" value="restaurant"><span><strong data-bind="roleRestaurant">Restaurant</strong></span></label>
+                <label class="choice choice-simple"><input type="radio" name="role" value="traiteur"><span><strong data-bind="roleTraiteur">Traiteur</strong></span></label>
               </div>
-              <p class="group-label">Pour le jour de l’événement</p>
+              <p class="group-label" data-bind="roleGroupEvent">Pour le jour de l’événement</p>
               <div class="choices choices-inline choices-event">
-                <label class="choice choice-simple"><input type="radio" name="role" value="animateur"><span><strong>Animateur</strong></span></label>
-                <label class="choice choice-simple"><input type="radio" name="role" value="dj"><span><strong>DJ</strong></span></label>
+                <label class="choice choice-simple"><input type="radio" name="role" value="animateur"><span><strong data-bind="roleAnimateur">Animateur</strong></span></label>
+                <label class="choice choice-simple"><input type="radio" name="role" value="dj"><span><strong data-bind="roleDj">DJ</strong></span></label>
               </div>
-              <p class="place-line" id="network-sentence">Choisissez hôtel, restaurant, traiteur, animateur ou DJ.</p>
+              <p class="place-line" id="network-sentence" data-bind="placePrompt">Choisissez hôtel, restaurant, traiteur, animateur ou DJ.</p>
               <p class="field-error" id="err-role-set" hidden></p>
             </fieldset>
 
             <div class="form-grid">
               <div class="field">
-                <label for="nom">Nom</label>
+                <label for="nom" data-bind="labelNom">Nom</label>
                 <input id="nom" name="nom" autocomplete="name" maxlength="80" required>
                 <p class="field-error" id="err-nom" hidden></p>
               </div>
               <div class="field">
-                <label for="structure">Établissement</label>
+                <label for="structure" data-bind="labelStructure">Établissement</label>
                 <input id="structure" name="structure" autocomplete="organization" maxlength="120" required>
                 <p class="field-error" id="err-structure" hidden></p>
               </div>
               <div class="field wide">
-                <label for="email">E-mail</label>
+                <label for="email" data-bind="labelEmail">E-mail</label>
                 <input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="120" required>
                 <p class="field-error" id="err-email" hidden></p>
               </div>
               <div class="field wide">
-                <label for="message">Message <span class="hint">(facultatif)</span></label>
-                <textarea id="message" name="message" maxlength="1500" placeholder="Un mot suffit, si vous voulez préciser."></textarea>
+                <label for="message"><span data-bind="labelMessage">Message</span> <span class="hint" data-bind="labelOptional">(facultatif)</span></label>
+                <textarea id="message" name="message" maxlength="1500" placeholder="Un mot suffit, si vous voulez préciser." data-bind-placeholder="messagePlaceholder"></textarea>
               </div>
             </div>
 
             <label class="consent" id="consent-label">
               <input id="consent" name="consent" type="checkbox" required>
-              <span>Je confirme que ces informations peuvent être transmises au collectif OREKA, uniquement pour répondre à ma demande de partenariat. <a href="mentions.html">Mentions légales</a></span>
+              <span><span data-bind="consent">Je confirme que ces informations peuvent être transmises au collectif OREKA, uniquement pour répondre à ma demande de partenariat.</span> <a href="mentions.html" data-bind="mentionsLink">Mentions légales</a></span>
             </label>
             <p class="field-error" id="err-consent" hidden></p>
-            <button class="btn btn-primary" type="submit">Préparer la demande</button>
-            <p class="hint">Vous voyez le message avant qu’il soit transmis.</p>
+            <button class="btn btn-primary" type="submit" data-bind="submitPrepare">Préparer la demande</button>
+            <p class="hint" data-bind="formHint">Vous voyez le message avant qu’il soit transmis.</p>
           </div>
         </form>
 
         <div id="form-success" class="success" tabindex="-1" hidden>
-          <p class="eyebrow">Partenariat</p>
-          <h3 id="success-title">Demande prête</h3>
+          <p class="eyebrow" data-bind="successEyebrow">Partenariat</p>
+          <h3 id="success-title" data-bind="successReadyTitle">Demande prête</h3>
           <p id="success-lead"></p>
           <pre class="message-preview" id="message-preview"></pre>
           <div class="actions">
-            <button class="btn btn-primary" id="confirm-send" type="button">Envoyer la demande</button>
-            <a class="btn btn-ghost" id="mailto-link" href="#rejoindre">Ouvrir dans l’e-mail</a>
-            <button class="btn btn-ghost" id="copy-message" type="button">Copier le message</button>
-            <button class="btn btn-ghost" id="new-request" type="button">Nouvelle demande</button>
+            <button class="btn btn-primary" id="confirm-send" type="button" data-bind="confirmSend">Envoyer la demande</button>
+            <a class="btn btn-ghost" id="mailto-link" href="#rejoindre" data-bind="openMail">Ouvrir dans l’e-mail</a>
+            <button class="btn btn-ghost" id="copy-message" type="button" data-bind="copyMessage">Copier le message</button>
+            <button class="btn btn-ghost" id="new-request" type="button" data-bind="newRequest">Nouvelle demande</button>
           </div>
         </div>
       </div>
@@ -247,22 +247,22 @@
   <footer class="site-footer">
     <div class="wrap footer-grid">
       <div>
-        <a class="brand" href="#jour" aria-label="Oreka Metz">
+        <a class="brand" href="#jour" aria-label="Oreka Metz" data-bind-aria="brandLabel">
           <img data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
         </a>
         <p data-bind="footer">Site officiel d’OREKA, projet de 13 étudiants de l’IAE Metz.</p>
       </div>
       <div>
-        <p class="footer-label">Explorer</p>
-        <a href="#jour">Le jour J</a>
-        <a href="#partenaires">Les partenaires</a>
-        <a href="#oreka">Le projet</a>
-        <a href="#rejoindre">Devenir partenaire</a>
+        <p class="footer-label" data-bind="footerExplore">Explorer</p>
+        <a href="#jour" data-bind="footJour">Le jour J</a>
+        <a href="#partenaires" data-bind="footPartners">Les partenaires</a>
+        <a href="#oreka" data-bind="footProject">Le projet</a>
+        <a href="#rejoindre" data-bind="footJoin">Devenir partenaire</a>
       </div>
     </div>
     <div class="wrap footer-base">
-      <p>© 2026 Collectif OREKA</p>
-      <a href="mentions.html">Mentions légales</a>
+      <p data-bind="copyright">© 2026 Collectif OREKA</p>
+      <a href="mentions.html" data-bind="footMentions">Mentions légales</a>
     </div>
   </footer>
 

@@ -20,7 +20,7 @@
   <main id="gate" class="wrap gate">
     <p class="eyebrow">Collectif uniquement</p>
     <h1>Réglages</h1>
-    <p class="lede">Cette page n’est pas dans le menu du site. Elle sert à modifier le logo, les couleurs, les textes, les membres, les partenaires et la date du compte à rebours.</p>
+    <p class="lede">Cette page n’est pas dans le menu du site. Elle sert à modifier le logo, chaque couleur, chaque texte, les membres, les partenaires et la date du compte à rebours.</p>
     <form id="gate-form">
       <div class="field">
         <label for="gate-code">Code d’accès</label>
@@ -73,31 +73,26 @@
 
       <section class="settings-card">
         <h2>Couleurs</h2>
+        <p class="help">Chaque nuance du site : fond, cartes, textes, liens, boutons, filets et pastilles des membres. L’aperçu montre le résultat.</p>
         <div class="color-grid">
-          <label>Fond <input id="color-bg" type="color" value="#fff7fb"></label>
-          <label>Texte <input id="color-ink" type="color" value="#2a1220"></label>
-          <label>Texte secondaire <input id="color-muted" type="color" value="#5c3a4a"></label>
-          <label>Rose <input id="color-pink" type="color" value="#f61c96"></label>
-          <label>Rose foncé <input id="color-pink2" type="color" value="#d01278"></label>
+          <label>Fond <input data-color="bg" type="color" value="#fff7fb" data-default="#fff7fb"></label>
+          <label>Cartes <input data-color="surface" type="color" value="#ffffff" data-default="#ffffff"></label>
+          <label>Texte <input data-color="ink" type="color" value="#2a1220" data-default="#2a1220"></label>
+          <label>Texte secondaire <input data-color="muted" type="color" value="#5c3a4a" data-default="#5c3a4a"></label>
+          <label>Texte discret <input data-color="faint" type="color" value="#7a5364" data-default="#7a5364"></label>
+          <label>Rose <input data-color="pink" type="color" value="#f61c96" data-default="#f61c96"></label>
+          <label>Rose foncé <input data-color="pink2" type="color" value="#d01278" data-default="#d01278"></label>
+          <label>Rose doux <input data-color="pinkSoft" type="color" value="#c2187a" data-default="#c2187a"></label>
+          <label>Texte sur le rose <input data-color="inkOnPink" type="color" value="#2a1220" data-default="#2a1220"></label>
+          <label>Lien au survol <input data-color="linkHover" type="color" value="#8d105c" data-default="#8d105c"></label>
+          <label>Filets <input data-color="line" type="color" value="#e01386" data-default="#e01386"></label>
+          <label>Alerte <input data-color="alert" type="color" value="#9d1048" data-default="#9d1048"></label>
+          <label>Pastille claire <input data-color="memberLight" type="color" value="#ff8ec4" data-default="#ff8ec4"></label>
+          <label>Pastille très claire <input data-color="memberLight2" type="color" value="#ffe3f1" data-default="#ffe3f1"></label>
         </div>
       </section>
 
-      <section class="settings-card">
-        <h2>Textes</h2>
-        <div class="stack">
-          <label>Petit titre des partenaires <input data-text="partnersEyebrow"></label>
-          <label>Titre des partenaires <input data-text="partnersTitle"></label>
-          <label>Introduction des partenaires <textarea data-text="partnersIntro"></textarea></label>
-          <label>Note sous la liste <input data-text="partnersHint"></label>
-          <label>Petit titre de la présentation <input data-text="projectEyebrow"></label>
-          <label>Titre de la présentation <input data-text="projectTitle"></label>
-          <label>Présentation <textarea data-text="projectBody"></textarea></label>
-          <label>Petit titre du formulaire <input data-text="formEyebrow"></label>
-          <label>Titre du formulaire <input data-text="formTitle"></label>
-          <label>Introduction du formulaire <textarea data-text="formIntro"></textarea></label>
-          <label>Pied de page <input data-text="footer"></label>
-        </div>
-      </section>
+      <div id="text-groups"></div>
 
       <section class="settings-card">
         <h2>Membres du projet</h2>
@@ -131,6 +126,7 @@
     </div>
   </main>
 
+  <script src="js/text-catalog.js"></script>
   <script src="js/config.js"></script>
   <script src="js/reglages.js"></script>
 </body>

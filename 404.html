@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="no-js">
+<html lang="fr" class="no-js" data-title="lostPageTitle">
 <head>
   <script>
     if (location.hostname === "siahmedalaa.github.io") {
@@ -18,20 +18,21 @@
 <body>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Oreka Metz">
-        <img src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
+      <a class="brand" href="index.html" aria-label="Oreka Metz" data-bind-aria="brandLabel">
+        <img data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
       </a>
-      <a class="nav-cta" href="index.html#rejoindre">Devenir partenaire</a>
+      <a class="nav-cta" href="index.html#rejoindre" data-bind="navCta">Devenir partenaire</a>
     </div>
   </header>
   <main id="contenu" class="wrap lost">
-    <p class="eyebrow">Erreur 404</p>
-    <h1>Cette page n’est pas dans le réseau.</h1>
-    <p class="lede">Le lien est introuvable. Le site du collectif, lui, est toujours là.</p>
+    <p class="eyebrow" data-bind="lostEyebrow">Erreur 404</p>
+    <h1 data-bind="lostTitle">Cette page n’est pas dans le réseau.</h1>
+    <p class="lede" data-bind="lostLead">Le lien est introuvable. Le site du collectif, lui, est toujours là.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="index.html">Retour à l’accueil</a>
-      <a class="btn btn-ghost" href="index.html#rejoindre">Devenir partenaire</a>
+      <a class="btn btn-primary" href="index.html" data-bind="lostHome">Retour à l’accueil</a>
+      <a class="btn btn-ghost" href="index.html#rejoindre" data-bind="lostCta">Devenir partenaire</a>
     </div>
   </main>
+  <script src="js/content.js" defer></script>
 </body>
 </html>

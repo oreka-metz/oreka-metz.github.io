@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="no-js">
+<html lang="fr" class="no-js" data-title="mentionsTitle">
 <head>
   <script>
     if (location.hostname === "siahmedalaa.github.io") {
@@ -10,55 +10,56 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mentions légales — OREKA</title>
-  <meta name="description" content="Mentions légales du site officiel du collectif universitaire OREKA, à Metz.">
+  <meta name="description" data-bind-content="mentionsDescription" content="Mentions légales du site officiel du collectif universitaire OREKA, à Metz.">
   <meta name="theme-color" content="#fff7fb">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
   <script>document.documentElement.classList.replace("no-js","js");</script>
 </head>
 <body>
-  <a class="skip" href="#contenu">Aller au contenu</a>
+  <a class="skip" href="#contenu" data-bind="skipLink">Aller au contenu</a>
   <div class="scroll-progress" aria-hidden="true"></div>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="index.html" aria-label="Oreka Metz">
-        <img src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
+      <a class="brand" href="index.html" aria-label="Oreka Metz" data-bind-aria="brandLabel">
+        <img data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav" class="site-nav" aria-label="Navigation principale">
-        <a class="nav-link" href="index.html#jour">Jour J</a>
-        <a class="nav-link" href="index.html#partenaires">Partenaires</a>
-        <a class="nav-link" href="index.html#oreka">OREKA</a>
-        <a href="mentions.html" aria-current="page">Mentions</a>
-        <a class="nav-cta" href="index.html#rejoindre">Devenir partenaire</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-bind="navMenu">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Navigation principale" data-bind-aria="navAria">
+        <a class="nav-link" href="index.html#jour" data-bind="navJour">Jour J</a>
+        <a class="nav-link" href="index.html#partenaires" data-bind="navPartners">Partenaires</a>
+        <a class="nav-link" href="index.html#oreka" data-bind="navProject">OREKA</a>
+        <a href="mentions.html" aria-current="page" data-bind="navMentions">Mentions</a>
+        <a class="nav-cta" href="index.html#rejoindre" data-bind="navCta">Devenir partenaire</a>
       </nav>
     </div>
   </header>
   <main id="contenu" class="wrap legal">
     <header class="page-hero">
-      <p class="eyebrow">Collectif OREKA · Metz</p>
-      <h1>Mentions légales</h1>
+      <p class="eyebrow" data-bind="mentionsEyebrow">Collectif OREKA · Metz</p>
+      <h1 data-bind="mentionsH1">Mentions légales</h1>
     </header>
-    <h2>Éditeur</h2>
-    <p>Le site est le site officiel d’OREKA, projet de 13 étudiantes et étudiants de l’IAE Metz, en management et développement de systèmes hôteliers. Il présente le groupe et recueille des propositions de partenariat : hôtels, restaurants et traiteurs pour le projet, animateurs et DJ pour le jour de l’événement.</p>
-    <h2>Hébergement</h2>
-    <p>Le site est hébergé gratuitement par GitHub Pages, service de GitHub, Inc., San Francisco, États-Unis. La consultation se fait en HTTPS.</p>
-    <h2>Signe et textes</h2>
-    <p>Le logo affiché est le fichier officiel : le ruban rose, le cercle, le mot Oreka, Metz, les deux points roses, et la ligne « Le QG de l’hospitalité · Metz 2026 ». Le compte à rebours vise une date indicative, le mardi 20 avril 2027. Le collectif confirmera le jour exact. Les textes présentent le projet à partir des éléments communiqués par le groupe : 13 membres, étudiants à l’IAE Metz, un appel aux hôtels, restaurants et traiteurs, et un appel aux animateurs et DJ pour le jour de l’événement.</p>
-    <h2>Données personnelles</h2>
-    <p>Le formulaire « Devenir partenaire » demande un type de partenaire, un nom, un établissement, un e-mail et, si vous le souhaitez, un court message. Ces informations servent uniquement à répondre à la demande de partenariat.</p>
-    <p>La demande s’affiche d’abord dans votre navigateur. Elle n’est transmise qu’après votre confirmation, vers <a href="mailto:siahmedalaa@gmail.com">siahmedalaa@gmail.com</a>, par le service FormSubmit. Cette étape peut demander une vérification anti-spam. Vous pouvez aussi ouvrir le message dans votre messagerie ou le copier. Un brouillon peut rester dans la session de votre navigateur, sur votre appareil, jusqu’à la fermeture de l’onglet ou jusqu’à l’envoi.</p>
-    <p>Les messages restent dans cette boîte mail jusqu’à ce que le collectif les supprime. Pour demander l’accès, la correction ou la suppression de vos informations, écrivez à cette même adresse. Le site ne dépose pas de cookie de suivi. Les polices sont servies par le site lui-même.</p>
-    <h2>Contact</h2>
-    <p>Pour proposer un partenariat, utilisez la page <a href="index.html#rejoindre">Devenir partenaire</a>. Les demandes arrivent à <a href="mailto:siahmedalaa@gmail.com">siahmedalaa@gmail.com</a>.</p>
+    <h2 data-bind="mentionsEditorH">Éditeur</h2>
+    <p data-bind="mentionsEditor">Le site est le site officiel d’OREKA, projet de 13 étudiantes et étudiants de l’IAE Metz, en management et développement de systèmes hôteliers. Il présente le groupe et recueille des propositions de partenariat : hôtels, restaurants et traiteurs pour le projet, animateurs et DJ pour le jour de l’événement.</p>
+    <h2 data-bind="mentionsHostH">Hébergement</h2>
+    <p data-bind="mentionsHost">Le site est hébergé gratuitement par GitHub Pages, service de GitHub, Inc., San Francisco, États-Unis. La consultation se fait en HTTPS.</p>
+    <h2 data-bind="mentionsSignH">Signe et textes</h2>
+    <p data-bind="mentionsSign">Le logo affiché est le fichier officiel : le ruban rose, le cercle, le mot Oreka, Metz, les deux points roses, et la ligne « Le QG de l’hospitalité · Metz 2026 ». Le compte à rebours vise une date indicative, le mardi 20 avril 2027. Le collectif confirmera le jour exact. Les textes présentent le projet à partir des éléments communiqués par le groupe : 13 membres, étudiants à l’IAE Metz, un appel aux hôtels, restaurants et traiteurs, et un appel aux animateurs et DJ pour le jour de l’événement.</p>
+    <h2 data-bind="mentionsDataH">Données personnelles</h2>
+    <p data-bind="mentionsData">Le formulaire « Devenir partenaire » demande un type de partenaire, un nom, un établissement, un e-mail et, si vous le souhaitez, un court message. Ces informations servent uniquement à répondre à la demande de partenariat.</p>
+    <p><span data-bind="mentionsDataFlow">La demande s’affiche d’abord dans votre navigateur. Elle n’est transmise qu’après votre confirmation, vers</span> <a href="mailto:siahmedalaa@gmail.com" data-bind="mentionsInbox">siahmedalaa@gmail.com</a><span data-bind="mentionsDataFlow2">, par le service FormSubmit. Cette étape peut demander une vérification anti-spam. Vous pouvez aussi ouvrir le message dans votre messagerie ou le copier. Un brouillon peut rester dans la session de votre navigateur, sur votre appareil, jusqu’à la fermeture de l’onglet ou jusqu’à l’envoi.</span></p>
+    <p data-bind="mentionsDataKeep">Les messages restent dans cette boîte mail jusqu’à ce que le collectif les supprime. Pour demander l’accès, la correction ou la suppression de vos informations, écrivez à cette même adresse. Le site ne dépose pas de cookie de suivi. Les polices sont servies par le site lui-même.</p>
+    <h2 data-bind="mentionsContactH">Contact</h2>
+    <p><span data-bind="mentionsContactLead">Pour proposer un partenariat, utilisez la page</span> <a href="index.html#rejoindre" data-bind="mentionsContactCta">Devenir partenaire</a><span data-bind="mentionsContactMid">. Les demandes arrivent à</span> <a href="mailto:siahmedalaa@gmail.com" data-bind="mentionsInbox">siahmedalaa@gmail.com</a><span data-bind="mentionsContactEnd">.</span></p>
   </main>
   <footer class="site-footer">
     <div class="wrap footer-base">
-      <p>© 2026 Collectif OREKA</p>
-      <a href="index.html">Retour au site</a>
+      <p data-bind="copyright">© 2026 Collectif OREKA</p>
+      <a href="index.html" data-bind="backHome">Retour au site</a>
     </div>
   </footer>
   <script src="js/config.js" defer></script>
+  <script src="js/content.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 </html>

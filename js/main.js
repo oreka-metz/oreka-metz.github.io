@@ -2,20 +2,25 @@
   const inbox = (window.OREKA_INBOX || "").trim();
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  function siteText(key, fallback) {
+    const data = window.OREKA_SITE;
+    const texts = data && data.texts;
+    if (texts && Object.prototype.hasOwnProperty.call(texts, key) && texts[key] != null) return String(texts[key]);
+    return fallback;
+  }
+
+  function fillTpl(template, map) {
+    return String(template).replace(/\{(\w+)\}/g, function (_, key) {
+      return map[key] != null ? String(map[key]) : "";
+    });
+  }
+
   const ROLES = {
     hotel: "hôtel",
     restaurant: "restaurant",
     traiteur: "traiteur",
     animateur: "animateur",
     dj: "DJ"
-  };
-
-  const GROUPS = {
-    hotel: "du projet",
-    restaurant: "du projet",
-    traiteur: "du projet",
-    animateur: "du jour J",
-    dj: "du jour J"
   };
 
   function boot(name, fn) {
@@ -40,10 +45,18 @@
     const nav = document.querySelector(".site-nav");
     if (!toggle || !nav) return;
 
+    function openLabel() {
+      return toggle.dataset.openLabel || siteText("navMenu", "Menu");
+    }
+
+    function closeLabel() {
+      return toggle.dataset.closeLabel || siteText("navClose", "Fermer");
+    }
+
     function close() {
       nav.classList.remove("is-open");
       toggle.setAttribute("aria-expanded", "false");
-      toggle.textContent = "Menu";
+      toggle.textContent = openLabel();
       document.body.classList.remove("nav-open");
     }
 
@@ -53,9 +66,13 @@
       else {
         nav.classList.add("is-open");
         toggle.setAttribute("aria-expanded", "true");
-        toggle.textContent = "Fermer";
+        toggle.textContent = closeLabel();
         document.body.classList.add("nav-open");
       }
+    });
+
+    document.addEventListener("oreka-content", function () {
+      if (toggle.getAttribute("aria-expanded") !== "true") toggle.textContent = openLabel();
     });
 
     nav.addEventListener("click", function (event) {
@@ -181,7 +198,16 @@
     let looping = false;
     let appear = 0;
 
+    function paintColor(name, fallback) {
+      const value = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      return value || fallback;
+    }
+
     function draw(time) {
+      const pink = paintColor("--pink", "#f61c96");
+      const soft = paintColor("--pink-soft", "#c2187a");
+      const deep = paintColor("--pink-2", "#d01278");
+      const ink = paintColor("--ink", "#2a1220");
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = canvas.clientWidth || 300;
       const h = canvas.clientHeight || 220;
@@ -204,8 +230,8 @@
       const ox = canvas.dataset.mode === "hero" && canvas._px ? canvas._px * 14 : 0;
       const oy = canvas.dataset.mode === "hero" && canvas._py ? canvas._py * 10 : 0;
       const nodes = [
-        { x: cx - unit * 0.055 + ox * 0.2, y: cy + oy * 0.2, r: Math.max(10, unit * 0.045), c: "#F61C96" },
-        { x: cx + unit * 0.055 + ox * 0.2, y: cy + oy * 0.2, r: Math.max(10, unit * 0.045), c: "#FA5BB2" }
+        { x: cx - unit * 0.055 + ox * 0.2, y: cy + oy * 0.2, r: Math.max(10, unit * 0.045), c: pink },
+        { x: cx + unit * 0.055 + ox * 0.2, y: cy + oy * 0.2, r: Math.max(10, unit * 0.045), c: soft }
       ];
 
       for (let i = 0; i < 13; i += 1) {
@@ -216,7 +242,7 @@
           x: cx + Math.cos(angle) * radius + ox,
           y: cy + Math.sin(angle) * radius * 0.86 + oy,
           r: Math.max(3.2, unit * 0.012),
-          c: i % 2 ? "#FA5BB2" : "#F61C96",
+          c: i % 2 ? soft : pink,
           student: true,
           i: i
         });
@@ -228,7 +254,7 @@
           x: cx + Math.cos(-0.4) * radius * (0.35 + appear * 0.85),
           y: cy + Math.sin(-0.4) * radius * 0.86,
           r: Math.max(6, unit * 0.02),
-          c: "#d01278",
+          c: deep,
           partner: true
         });
       }
@@ -237,12 +263,12 @@
       for (let i = 0; i < 13; i += 1) {
         const a = nodes[2 + i];
         const b = nodes[2 + ((i + 1) % 13)];
-        ctx.strokeStyle = "rgba(224, 19, 134, 0.28)";
+        ctx.strokeStyle = soft;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(b.x, b.y);
         ctx.stroke();
-        ctx.strokeStyle = "rgba(246, 28, 150, 0.28)";
+        ctx.strokeStyle = pink;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
         ctx.lineTo(nodes[i % 2].x, nodes[i % 2].y);
@@ -251,7 +277,7 @@
 
       const partner = nodes.find(function (node) { return node.partner; });
       if (partner) {
-        ctx.strokeStyle = "rgba(209, 18, 120, 0.85)";
+        ctx.strokeStyle = deep;
         ctx.beginPath();
         ctx.moveTo(partner.x, partner.y);
         ctx.lineTo(nodes[0].x, nodes[0].y);
@@ -261,7 +287,7 @@
       nodes.forEach(function (node) {
         if (node.partner) {
           ctx.beginPath();
-          ctx.fillStyle = "rgba(246, 28, 150, 0.28)";
+          ctx.fillStyle = pink;
           ctx.arc(node.x, node.y, node.r + 8, 0, Math.PI * 2);
           ctx.fill();
         }
@@ -272,7 +298,7 @@
       });
 
       if (partner && canvas.dataset.label) {
-        ctx.fillStyle = "#2a1220";
+        ctx.fillStyle = ink;
         ctx.font = "600 13px Manrope, Segoe UI, sans-serif";
         ctx.textAlign = "center";
         ctx.fillText(canvas.dataset.label, partner.x, partner.y + partner.r + 16);
@@ -376,8 +402,16 @@
       if (units.minutes) units.minutes.textContent = pad(minutes);
       if (units.seconds) units.seconds.textContent = pad(seconds);
       const spoken = diff === 0
-        ? "La date indicative du jour J est atteinte."
-        : days + " jours, " + hours + " heures et " + minutes + " minutes avant le jour J, date indicative du " + whenLabel + ".";
+        ? siteText("countReached", "La date indicative du jour J est atteinte.")
+        : fillTpl(siteText("countBefore", "{days} {unitDays}, {hours} {unitHours} et {minutes} {unitMinutes} avant le jour J, date indicative du {when}."), {
+          days: days,
+          hours: hours,
+          minutes: minutes,
+          unitDays: siteText("unitDays", "jours"),
+          unitHours: siteText("unitHours", "heures"),
+          unitMinutes: siteText("unitMinutes", "minutes"),
+          when: whenLabel
+        });
       if (live && dateReady && spoken !== lastSpoken && (seconds === 0 || lastSpoken === "")) {
         live.textContent = spoken;
         lastSpoken = spoken;
@@ -569,19 +603,35 @@
       return el ? el.value.trim() : "";
     }
 
+    function roleLabel(value) {
+      const input = value ? form.querySelector('input[name="role"][value="' + value + '"]') : null;
+      const strong = input && input.parentElement.querySelector("strong");
+      if (strong && strong.textContent.trim()) return strong.textContent.trim();
+      return ROLES[value] || "";
+    }
+
+    function placeLabel(value) {
+      if (value === "animateur" || value === "dj") return siteText("placeEvent", "du jour J");
+      if (value) return siteText("placeProject", "du projet");
+      return "";
+    }
+
     function refresh() {
       const role = selectedRole();
       const org = valueOf("structure");
       const bits = [];
-      if (!role) bits.push("Choisissez hôtel, restaurant, traiteur, animateur ou DJ.");
-      else bits.push("Partenaire " + GROUPS[role] + " : " + ROLES[role] + ".");
-      if (org) bits.push("Établissement : " + org + ".");
+      if (!role) bits.push(siteText("placePrompt", "Choisissez hôtel, restaurant, traiteur, animateur ou DJ."));
+      else bits.push(fillTpl(siteText("sentencePartner", "Partenaire {place} : {role}."), {
+        place: placeLabel(role),
+        role: roleLabel(role)
+      }));
+      if (org) bits.push(fillTpl(siteText("sentenceOrg", "Établissement : {org}."), { org: org }));
       if (sentence) sentence.textContent = bits.join(" ");
-      if (status) status.textContent = role ? "Place esquissée" : "En attente";
+      if (status) status.textContent = role ? siteText("statusReady", "Place esquissée") : siteText("statusWait", "En attente");
       [canvas, document.getElementById("hero-net")].forEach(function (board) {
         if (!board) return;
         board.dataset.active = role ? "1" : "0";
-        board.dataset.label = role ? ROLES[role] : "";
+        board.dataset.label = role ? roleLabel(role) : "";
         if (board._redraw) board._redraw();
       });
     }
@@ -607,27 +657,32 @@
 
     function validate() {
       const problems = [];
-      const roleOk = showError("role-set", selectedRole() ? "" : "Choisissez un type de partenaire.");
-      if (!roleOk) problems.push(["role-set", "Choisir un type"]);
+      const roleOk = showError("role-set", selectedRole() ? "" : siteText("errRole", "Choisissez un type de partenaire."));
+      if (!roleOk) problems.push(["role-set", siteText("errLinkRole", "Choisir un type")]);
       const nom = valueOf("nom");
-      if (!showError("nom", nom.length >= 2 ? "" : "Indiquez votre nom.")) problems.push(["nom", "Nom"]);
+      if (!showError("nom", nom.length >= 2 ? "" : siteText("errNom", "Indiquez votre nom."))) problems.push(["nom", siteText("errLinkNom", "Nom")]);
       const structure = valueOf("structure");
-      if (!showError("structure", structure.length >= 2 ? "" : "Indiquez l’établissement.")) problems.push(["structure", "Établissement"]);
+      if (!showError("structure", structure.length >= 2 ? "" : siteText("errStructure", "Indiquez l’établissement."))) problems.push(["structure", siteText("errLinkStructure", "Établissement")]);
       const email = valueOf("email");
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      if (!showError("email", emailOk ? "" : "Indiquez un e-mail valide.")) problems.push(["email", "E-mail"]);
+      if (!showError("email", emailOk ? "" : siteText("errEmail", "Indiquez un e-mail valide."))) problems.push(["email", siteText("errLinkEmail", "E-mail")]);
       const consent = document.getElementById("consent");
       const consentOk = consent && consent.checked;
-      showError("consent", consentOk ? "" : "Confirmez l’usage de ces informations.");
-      if (!consentOk) problems.push(["consent", "Confirmation"]);
+      showError("consent", consentOk ? "" : siteText("errConsent", "Confirmez l’usage de ces informations."));
+      if (!consentOk) problems.push(["consent", siteText("errLinkConsent", "Confirmation")]);
 
       if (alertBox) {
+        alertBox.textContent = "";
         if (!problems.length) {
           alertBox.hidden = true;
-          alertBox.innerHTML = "";
         } else {
           alertBox.hidden = false;
-          alertBox.innerHTML = "<strong>Il reste " + problems.length + (problems.length > 1 ? " points" : " point") + " à compléter.</strong>";
+          const strong = document.createElement("strong");
+          const template = problems.length > 1
+            ? siteText("errCountMany", "Il reste {n} points à compléter.")
+            : siteText("errCountOne", "Il reste {n} point à compléter.");
+          strong.textContent = fillTpl(template, { n: problems.length });
+          alertBox.appendChild(strong);
           problems.forEach(function (item) {
             const link = document.createElement("a");
             link.href = "#" + item[0];
@@ -643,16 +698,16 @@
     }
 
     function compose() {
-      const role = ROLES[selectedRole()] || "";
+      const role = selectedRole();
       const when = new Date().toLocaleDateString("fr-FR", { dateStyle: "long" });
       const lines = [
-        "Demande de partenariat — OREKA",
-        "Date : " + when,
-        "Nom : " + valueOf("nom"),
-        "Établissement : " + valueOf("structure"),
-        "Place : partenaire " + (GROUPS[selectedRole()] || ""),
-        "Type : " + role,
-        "E-mail : " + valueOf("email")
+        siteText("mailHeading", "Demande de partenariat — OREKA"),
+        fillTpl(siteText("mailDate", "Date : {value}"), { value: when }),
+        fillTpl(siteText("mailName", "Nom : {value}"), { value: valueOf("nom") }),
+        fillTpl(siteText("mailStructure", "Établissement : {value}"), { value: valueOf("structure") }),
+        fillTpl(siteText("mailPlace", "Place : partenaire {value}"), { value: placeLabel(role) }),
+        fillTpl(siteText("mailType", "Type : {value}"), { value: roleLabel(role) }),
+        fillTpl(siteText("mailEmail", "E-mail : {value}"), { value: valueOf("email") })
       ];
       if (valueOf("message")) {
         lines.push("");
@@ -741,20 +796,20 @@
       }
       const title = document.getElementById("success-title");
       const lead = document.getElementById("success-lead");
-      if (title) title.textContent = "Demande prête";
-      if (lead) lead.textContent = "Relisez le message. Il n’est pas encore envoyé. Confirmez pour le transmettre au collectif, ou ouvrez-le dans votre e-mail.";
+      if (title) title.textContent = siteText("successReadyTitle", "Demande prête");
+      if (lead) lead.textContent = siteText("successReadyLead", "Relisez le message. Il n’est pas encore envoyé. Confirmez pour le transmettre au collectif, ou ouvrez-le dans votre e-mail.");
       const mail = document.getElementById("mailto-link");
       if (mail) {
         mail.hidden = false;
         mail.href = "mailto:" + (inbox || "")
-          + "?subject=" + encodeURIComponent("Partenariat OREKA — " + valueOf("structure"))
+          + "?subject=" + encodeURIComponent(fillTpl(siteText("mailSubject", "Partenariat OREKA — {value}"), { value: valueOf("structure") }))
           + "&body=" + encodeURIComponent(text);
       }
       const confirm = document.getElementById("confirm-send");
       if (confirm) {
         confirm.hidden = !inbox;
         confirm.disabled = false;
-        confirm.textContent = "Envoyer la demande";
+        confirm.textContent = siteText("confirmSend", "Envoyer la demande");
       }
       if (fieldsWrap) fieldsWrap.hidden = true;
       if (success) {
@@ -766,8 +821,8 @@
     function showSent() {
       const title = document.getElementById("success-title");
       const lead = document.getElementById("success-lead");
-      if (title) title.textContent = "Demande envoyée";
-      if (lead) lead.textContent = "Le collectif a reçu votre message et peut vous répondre à l’adresse indiquée.";
+      if (title) title.textContent = siteText("successSentTitle", "Demande envoyée");
+      if (lead) lead.textContent = siteText("successSentLead", "Le collectif a reçu votre message et peut vous répondre à l’adresse indiquée.");
       if (preview) preview.hidden = true;
       const confirm = document.getElementById("confirm-send");
       if (confirm) confirm.hidden = true;
@@ -790,10 +845,10 @@
         email: valueOf("email"),
         _replyto: valueOf("email"),
         structure: valueOf("structure"),
-        profil: ROLES[selectedRole()] || "",
-        place: GROUPS[selectedRole()] || "",
+        profil: roleLabel(selectedRole()),
+        place: placeLabel(selectedRole()),
         message: text,
-        _subject: "Partenariat OREKA — " + valueOf("structure"),
+        _subject: fillTpl(siteText("mailSubject", "Partenariat OREKA — {value}"), { value: valueOf("structure") }),
         _template: "table",
         _honey: "",
         _next: "https://oreka-metz.github.io/?envoye=1"
@@ -811,6 +866,7 @@
 
     restoreDraft();
     refresh();
+    document.addEventListener("oreka-content", refresh);
 
     if (new URLSearchParams(location.search).get("envoye") === "1") {
       showSent();
@@ -836,7 +892,7 @@
       if (Date.now() - openedAt < 1500) {
         if (alertBox) {
           alertBox.hidden = false;
-          alertBox.textContent = "Merci de relire le formulaire un instant avant de préparer la demande.";
+          alertBox.textContent = siteText("waitHint", "Merci de relire le formulaire un instant avant de préparer la demande.");
         }
         return;
       }
@@ -859,12 +915,12 @@
         }
         if (recentSends().length >= 3) {
           const lead = document.getElementById("success-lead");
-          if (lead) lead.textContent = "Plusieurs demandes viennent d’être envoyées depuis ce navigateur. Réessayez plus tard, ou ouvrez le message dans votre e-mail.";
+          if (lead) lead.textContent = siteText("rateLimit", "Plusieurs demandes viennent d’être envoyées depuis ce navigateur. Réessayez plus tard, ou ouvrez le message dans votre e-mail.");
           return;
         }
         noteSend();
         confirmSend.disabled = true;
-        confirmSend.textContent = "Envoi…";
+        confirmSend.textContent = siteText("sendingLabel", "Envoi…");
         postInbox(pendingText);
       });
     }
@@ -876,6 +932,7 @@
         refresh();
         if (fieldsWrap) fieldsWrap.hidden = false;
         if (success) success.hidden = true;
+        if (copyBtn) copyBtn.textContent = siteText("copyMessage", "Copier le message");
         document.getElementById("nom").focus();
       });
     }
@@ -884,7 +941,7 @@
     if (copyBtn) {
       copyBtn.addEventListener("click", async function () {
         const ok = await copyText(preview ? preview.textContent : "");
-        copyBtn.textContent = ok ? "Message copié" : "Copie impossible";
+        copyBtn.textContent = ok ? siteText("copyDone", "Message copié") : siteText("copyFail", "Copie impossible");
       });
     }
   });
