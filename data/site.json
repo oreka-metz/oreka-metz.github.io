@@ -1,6 +1,6 @@
 {
   "logo": "assets/logo-officiel.png?v=2",
-  "countdown": "2027-04-20T18:00:00+02:00",
+  "countdown": "2027-03-11T18:00:00+01:00",
   "colors": {
     "bg": "#fff7fb",
     "surface": "#ffffff",
@@ -18,27 +18,27 @@
     "memberLight2": "#ffe3f1"
   },
   "texts": {
-    "eyebrow": "Jour J · avril 2027",
-    "countNote": "Date indicative : avril 2027",
-    "partnersEyebrow": "Partenaires",
-    "partnersTitle": "Une liste qui tourne.",
-    "partnersIntro": "Hôtels, restaurants et traiteurs pour le projet. Animateurs et DJ pour le jour de l’événement. Faites tourner la liste, ou choisissez une carte.",
-    "partnersHint": "Dès qu’un partenaire confirme, son nom ou son logo prend la place de la carte.",
-    "projectEyebrow": "Le projet",
-    "projectTitle": "Treize membres, à l’IAE Metz.",
-    "projectBody": "OREKA réunit 13 étudiantes et étudiants en management et développement de systèmes hôteliers. Le groupe construit un réseau, invite des partenaires, et prépare le jour J.",
-    "formEyebrow": "Devenir partenaire",
-    "formTitle": "Un petit formulaire.",
+    "eyebrow": "Jour J · mars 2027",
+    "countNote": "jeudi 11 mars 2027",
+    "partnersEyebrow": "",
+    "partnersTitle": "Nos Partenaire",
+    "partnersIntro": "",
+    "partnersHint": "",
+    "projectEyebrow": "",
+    "projectTitle": "10 membres, à l’IAE Metz.",
+    "projectBody": "OREKA réunit 10 étudiantes et étudiants en management et développement de systèmes hôteliers. Le groupe construit un réseau, invite des partenaires, et prépare le jour J.",
+    "formEyebrow": "",
+    "formTitle": "Devenir notre partenaire",
     "formIntro": "Choisissez votre place, puis laissez un nom, un établissement et un e-mail.",
-    "footer": "Site officiel d’OREKA, projet de 13 étudiants de l’IAE Metz.",
+    "footer": "Site officiel d’OREKA",
     "pageTitle": "OREKA — Projet hôtelier de l’IAE Metz",
-    "metaDescription": "Site officiel d’OREKA, 13 étudiantes et étudiants de l’IAE Metz en management et développement de systèmes hôteliers. Compte à rebours du jour J, partenaires et formulaire.",
+    "metaDescription": "Site officiel d’OREKA, 10 étudiantes et étudiants de l’IAE Metz en management et développement de systèmes hôteliers. Compte à rebours du jour J, partenaires et formulaire.",
     "ogTitle": "OREKA — Le jour J, les partenaires",
-    "ogDescription": "13 étudiants de l’IAE Metz. Jour J indicatif le 20 avril 2027. Hôtels, restaurants, traiteurs, animateurs et DJ.",
+    "ogDescription": "10 étudiants de l’IAE Metz. Jour J indicatif le 11 mars 2027. Hôtels, restaurants, traiteurs, animateurs et DJ.",
     "twitterTitle": "OREKA — Metz",
-    "twitterDescription": "OREKA, projet de l’IAE Metz. Jour J indicatif le 20 avril 2027, partenaires et formulaire.",
+    "twitterDescription": "OREKA, projet de l’IAE Metz. Jour J indicatif le 11 mars 2027, partenaires et formulaire.",
     "schemaName": "OREKA",
-    "schemaDescription": "Projet de 13 étudiantes et étudiants de l’IAE Metz, en management et développement de systèmes hôteliers.",
+    "schemaDescription": "Projet de 10 étudiantes et étudiants de l’IAE Metz, en management et développement de systèmes hôteliers.",
     "schemaCity": "Metz",
     "brandLabel": "Oreka Metz",
     "heroLogoAlt": "OREKA",
@@ -68,7 +68,7 @@
     "reelPrev": "Partenaire précédent",
     "reelNext": "Partenaire suivant",
     "reelEmpty": "Choisissez une carte, ou laissez la liste tourner.",
-    "memberCaption": "13 membres du projet, IAE Metz.",
+    "memberCaption": "10 membres du projet, IAE Metz.",
     "memberEmpty": "Membre {n} du projet, IAE Metz.",
     "memberWithName": "{who}, membre du projet, IAE Metz.",
     "memberWithRole": "Membre {n}, {role}.",
@@ -153,11 +153,11 @@
     "mentionsEyebrow": "Collectif OREKA · Metz",
     "mentionsH1": "Mentions légales",
     "mentionsEditorH": "Éditeur",
-    "mentionsEditor": "Le site est le site officiel d’OREKA, projet de 13 étudiantes et étudiants de l’IAE Metz, en management et développement de systèmes hôteliers. Il présente le groupe et recueille des propositions de partenariat : hôtels, restaurants et traiteurs pour le projet, animateurs et DJ pour le jour de l’événement.",
+    "mentionsEditor": "Le site est le site officiel d’OREKA, projet de 10 étudiantes et étudiants de l’IAE Metz, en management et développement de systèmes hôteliers. Il présente le groupe et recueille des propositions de partenariat : hôtels, restaurants et traiteurs pour le projet, animateurs et DJ pour le jour de l’événement.",
     "mentionsHostH": "Hébergement",
     "mentionsHost": "Le site est hébergé gratuitement par GitHub Pages, service de GitHub, Inc., San Francisco, États-Unis. La consultation se fait en HTTPS.",
     "mentionsSignH": "Signe et textes",
-    "mentionsSign": "Le logo affiché est le fichier officiel : le ruban rose, le cercle, le mot Oreka, Metz, les deux points roses, et la ligne « Le QG de l’hospitalité · Metz 2026 ». Le compte à rebours vise une date indicative, le mardi 20 avril 2027. Le collectif confirmera le jour exact. Les textes présentent le projet à partir des éléments communiqués par le groupe : 13 membres, étudiants à l’IAE Metz, un appel aux hôtels, restaurants et traiteurs, et un appel aux animateurs et DJ pour le jour de l’événement.",
+    "mentionsSign": "Le logo affiché est le fichier officiel : le ruban rose, le cercle, le mot Oreka, Metz, les deux points roses, et la ligne « Le QG de l’hospitalité · Metz 2026 ». Le compte à rebours vise une date indicative, le jeudi 11 mars 2027. Le collectif confirmera le jour exact. Les textes présentent le projet à partir des éléments communiqués par le groupe : 10 membres, étudiants à l’IAE Metz, un appel aux hôtels, restaurants et traiteurs, et un appel aux animateurs et DJ pour le jour de l’événement.",
     "mentionsDataH": "Données personnelles",
     "mentionsData": "Le formulaire « Devenir partenaire » demande un type de partenaire, un nom, un établissement, un e-mail et, si vous le souhaitez, un court message. Ces informations servent uniquement à répondre à la demande de partenariat.",
     "mentionsDataFlow": "La demande s’affiche d’abord dans votre navigateur. Elle n’est transmise qu’après votre confirmation, vers",
@@ -172,101 +172,74 @@
   },
   "members": [
     {
-      "prenom": "",
-      "nom": "",
-      "role": ""
+      "prenom": "Julien",
+      "nom": "PAHIN",
+      "role": "Chef de Projet"
     },
     {
-      "prenom": "",
-      "nom": "",
-      "role": ""
+      "prenom": "Clara",
+      "nom": "KAHINDO",
+      "role": "Trésorière"
     },
     {
-      "prenom": "",
-      "nom": "",
-      "role": ""
+      "prenom": "Sara",
+      "nom": "SADEGHI",
+      "role": "Chargée communication et logistique"
     },
     {
-      "prenom": "",
-      "nom": "",
-      "role": ""
+      "prenom": "Mouna",
+      "nom": "MOSSI",
+      "role": "Chargée relations entreprises & clients"
     },
     {
-      "prenom": "",
-      "nom": "",
-      "role": ""
+      "prenom": "Nassim",
+      "nom": "HEBBADJ",
+      "role": "Chargé de logistique"
     },
     {
-      "prenom": "",
-      "nom": "",
-      "role": ""
+      "prenom": "Serhii",
+      "nom": "DIDIICHUK",
+      "role": "Trésorier"
     },
     {
-      "prenom": "",
-      "nom": "",
-      "role": ""
+      "prenom": "Walid",
+      "nom": "BENYGHZER",
+      "role": "Trésorier"
     },
     {
-      "prenom": "",
-      "nom": "",
-      "role": ""
+      "prenom": "Mrine",
+      "nom": "FERERA",
+      "role": "Chargée relations entreprises & clients"
     },
     {
-      "prenom": "",
-      "nom": "",
-      "role": ""
+      "prenom": "Alaa",
+      "nom": "SIAHMED",
+      "role": "Chargé de logistique"
     },
     {
-      "prenom": "",
-      "nom": "",
-      "role": ""
-    },
-    {
-      "prenom": "",
-      "nom": "",
-      "role": ""
-    },
-    {
-      "prenom": "",
-      "nom": "",
-      "role": ""
-    },
-    {
-      "prenom": "",
-      "nom": "",
-      "role": ""
+      "prenom": "San",
+      "nom": "POIROT",
+      "role": "Chargé de communication et media"
     }
   ],
   "partners": [
     {
-      "name": "Hôtel",
+      "name": "LA CITADELLE",
       "group": "Pour le projet",
-      "detail": "Un hôtel peut accompagner les 13 membres pour réaliser le projet.",
-      "photo": ""
+      "detail": "Hôtel",
+      "photo": "assets/uploads/partenaire-1792151028005-0.jpg?v=1792151029692"
     },
     {
-      "name": "Restaurant",
+      "name": "IAE METZ",
       "group": "Pour le projet",
-      "detail": "Un restaurant peut rejoindre le réseau et aider à porter le projet.",
-      "photo": ""
+      "detail": "School of management",
+      "photo": "assets/uploads/partenaire-1792151398522-1.jpg?v=1792151400078"
     },
     {
-      "name": "Traiteur",
+      "name": "BDA",
       "group": "Pour le projet",
-      "detail": "Un traiteur peut prendre part à la réalisation du projet.",
-      "photo": ""
-    },
-    {
-      "name": "Animateur",
-      "group": "Pour le jour J",
-      "detail": "Un animateur rejoint OREKA pour faire vivre le jour de l’événement.",
-      "photo": ""
-    },
-    {
-      "name": "DJ",
-      "group": "Pour le jour J",
-      "detail": "Un DJ rejoint OREKA pour le jour de l’événement.",
-      "photo": ""
+      "detail": "ASSOCIATION",
+      "photo": "assets/uploads/partenaire-1792151400078-2.jpg?v=1792151401820"
     }
   ]
 }

@@ -350,8 +350,8 @@
   boot("countdown", function () {
     const root = document.querySelector("[data-countdown]");
     if (!root) return;
-    let target = new Date("2027-04-20T18:00:00+02:00").getTime();
-    let whenLabel = "20 avril 2027";
+    let target = new Date("2027-03-11T18:00:00+01:00").getTime();
+    let whenLabel = "11 mars 2027";
     let lastSpoken = "";
     let dateReady = false;
 

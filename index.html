@@ -10,7 +10,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>OREKA — Projet hôtelier de l’IAE Metz</title>
-  <meta name="description" data-bind-content="metaDescription" content="Site officiel d’OREKA, 13 étudiantes et étudiants de l’IAE Metz en management et développement de systèmes hôteliers. Compte à rebours du jour J, partenaires et formulaire.">
+  <meta name="description" data-bind-content="metaDescription" content="Site officiel d’OREKA, 10 étudiantes et étudiants de l’IAE Metz en management et développement de systèmes hôteliers. Compte à rebours du jour J, partenaires et formulaire.">
   <meta name="author" content="Collectif OREKA">
   <meta name="theme-color" content="#fff7fb">
   <link rel="canonical" href="https://oreka-metz.github.io/">
@@ -18,14 +18,14 @@
   <meta property="og:locale" content="fr_FR">
   <meta property="og:site_name" content="OREKA">
   <meta property="og:title" data-bind-content="ogTitle" content="OREKA — Le jour J, les partenaires">
-  <meta property="og:description" data-bind-content="ogDescription" content="13 étudiants de l’IAE Metz. Jour J indicatif le 20 avril 2027. Hôtels, restaurants, traiteurs, animateurs et DJ.">
+  <meta property="og:description" data-bind-content="ogDescription" content="10 étudiants de l’IAE Metz. Jour J indicatif le 11 mars 2027. Hôtels, restaurants, traiteurs, animateurs et DJ.">
   <meta property="og:url" content="https://oreka-metz.github.io/">
   <meta property="og:image" content="https://oreka-metz.github.io/assets/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" data-bind-content="twitterTitle" content="OREKA — Metz">
-  <meta name="twitter:description" data-bind-content="twitterDescription" content="OREKA, projet de l’IAE Metz. Jour J indicatif le 20 avril 2027, partenaires et formulaire.">
+  <meta name="twitter:description" data-bind-content="twitterDescription" content="OREKA, projet de l’IAE Metz. Jour J indicatif le 11 mars 2027, partenaires et formulaire.">
   <meta name="twitter:image" content="https://oreka-metz.github.io/assets/og.png">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
@@ -37,7 +37,7 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "OREKA",
-    "description": "Projet de 13 étudiantes et étudiants de l’IAE Metz, en management et développement de systèmes hôteliers.",
+    "description": "Projet de 10 étudiantes et étudiants de l’IAE Metz, en management et développement de systèmes hôteliers.",
     "url": "https://oreka-metz.github.io/",
     "logo": "https://oreka-metz.github.io/assets/logo-officiel.png?v=2",
     "address": {
@@ -74,7 +74,7 @@
       <div class="wrap hero-open">
         <h1 id="hero-title" class="sr" data-bind="heroTitle">Oreka Metz, compte à rebours du jour J</h1>
         <img class="hero-logo" data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="OREKA" data-bind-alt="heroLogoAlt">
-        <p class="eyebrow" data-bind="eyebrow">Jour J · avril 2027</p>
+        <p class="eyebrow" data-bind="eyebrow">Jour J · mars 2027</p>
         <div class="count" data-countdown aria-hidden="true">
           <div><strong data-count="days">00</strong><span data-bind="unitDays">jours</span></div>
           <div><strong data-count="hours">00</strong><span data-bind="unitHours">heures</span></div>
@@ -82,7 +82,7 @@
           <div><strong data-count="seconds">00</strong><span data-bind="unitSeconds">secondes</span></div>
         </div>
         <p class="sr" id="count-live" aria-live="polite"></p>
-        <p class="count-note" data-bind="countNote">Date indicative : avril 2027</p>
+        <p class="count-note" data-bind="countNote">jeudi 11 mars 2027</p>
         <div class="actions">
           <a class="btn btn-primary" href="#rejoindre" data-bind="heroCta">Devenir partenaire</a>
           <a class="btn btn-ghost" href="#oreka" data-bind="heroSecondary">Lire la présentation</a>
@@ -95,32 +95,27 @@
         <div class="section-head reveal">
           <span class="index-no" data-bind="sectionIndex1">01</span>
           <div>
-            <p class="eyebrow" data-bind="partnersEyebrow">Partenaires</p>
-            <h2 id="partners-title" data-bind="partnersTitle">Une liste qui tourne.</h2>
+            <p class="eyebrow" data-bind="partnersEyebrow"></p>
+            <h2 id="partners-title" data-bind="partnersTitle">Nos Partenaire</h2>
           </div>
         </div>
-        <p class="prose reveal" data-bind="partnersIntro">Hôtels, restaurants et traiteurs pour le projet. Animateurs et DJ pour le jour de l’événement. Faites tourner la liste, ou choisissez une carte.</p>
+        <p class="prose reveal" data-bind="partnersIntro"></p>
         <div class="reel reveal" data-reel aria-roledescription="carrousel" data-bind-roledescription="reelRole" aria-label="Partenaires" data-bind-aria="reelLabel">
           <div class="reel-stage">
-            <button type="button" class="reel-card" data-card data-detail="Un hôtel peut accompagner les 13 membres pour réaliser le projet.">
+            <button type="button" class="reel-card" data-card data-detail="Hôtel">
+              <img class="reel-photo" alt="" src="assets/uploads/partenaire-1792151028005-0.jpg?v=1792151029692">
               <span class="reel-kicker">Pour le projet</span>
-              <strong>Hôtel</strong>
+              <strong>LA CITADELLE</strong>
             </button>
-            <button type="button" class="reel-card" data-card data-detail="Un restaurant peut rejoindre le réseau et aider à porter le projet.">
+            <button type="button" class="reel-card" data-card data-detail="School of management">
+              <img class="reel-photo" alt="" src="assets/uploads/partenaire-1792151398522-1.jpg?v=1792151400078">
               <span class="reel-kicker">Pour le projet</span>
-              <strong>Restaurant</strong>
+              <strong>IAE METZ</strong>
             </button>
-            <button type="button" class="reel-card" data-card data-detail="Un traiteur peut prendre part à la réalisation du projet.">
+            <button type="button" class="reel-card" data-card data-detail="ASSOCIATION">
+              <img class="reel-photo" alt="" src="assets/uploads/partenaire-1792151400078-2.jpg?v=1792151401820">
               <span class="reel-kicker">Pour le projet</span>
-              <strong>Traiteur</strong>
-            </button>
-            <button type="button" class="reel-card" data-card data-detail="Un animateur rejoint OREKA pour faire vivre le jour de l’événement.">
-              <span class="reel-kicker">Pour le jour J</span>
-              <strong>Animateur</strong>
-            </button>
-            <button type="button" class="reel-card" data-card data-detail="Un DJ rejoint OREKA pour le jour de l’événement.">
-              <span class="reel-kicker">Pour le jour J</span>
-              <strong>DJ</strong>
+              <strong>BDA</strong>
             </button>
           </div>
           <div class="reel-nav">
@@ -128,7 +123,7 @@
             <button class="reel-arrow" type="button" data-next aria-label="Partenaire suivant" data-bind-aria="reelNext">›</button>
           </div>
           <p class="reel-detail" id="reel-detail" data-bind="reelEmpty">Choisissez une carte, ou laissez la liste tourner.</p>
-          <p class="hint reel-hint" data-bind="partnersHint">Dès qu’un partenaire confirme, son nom ou son logo prend la place de la carte.</p>
+          <p class="hint reel-hint" data-bind="partnersHint"></p>
         </div>
       </div>
     </section>
@@ -136,27 +131,24 @@
     <section class="section band" id="oreka" aria-labelledby="oreka-title">
       <div class="wrap present">
         <div class="reveal">
-          <p class="eyebrow" data-bind="projectEyebrow">Le projet</p>
-          <h2 id="oreka-title" data-bind="projectTitle">Treize membres, à l’IAE Metz.</h2>
-          <p class="prose" data-bind="projectBody">OREKA réunit 13 étudiantes et étudiants en management et développement de systèmes hôteliers. Le groupe construit un réseau, invite des partenaires, et prépare le jour J.</p>
+          <p class="eyebrow" data-bind="projectEyebrow"></p>
+          <h2 id="oreka-title" data-bind="projectTitle">10 membres, à l’IAE Metz.</h2>
+          <p class="prose" data-bind="projectBody">OREKA réunit 10 étudiantes et étudiants en management et développement de systèmes hôteliers. Le groupe construit un réseau, invite des partenaires, et prépare le jour J.</p>
         </div>
         <div class="reveal">
           <ul class="members">
-            <li><button type="button" data-label="Membre 01 du projet, IAE Metz." aria-label="Membre 1 du projet, IAE Metz">01</button></li>
-            <li><button type="button" data-label="Membre 02 du projet, IAE Metz." aria-label="Membre 2 du projet, IAE Metz">02</button></li>
-            <li><button type="button" data-label="Membre 03 du projet, IAE Metz." aria-label="Membre 3 du projet, IAE Metz">03</button></li>
-            <li><button type="button" data-label="Membre 04 du projet, IAE Metz." aria-label="Membre 4 du projet, IAE Metz">04</button></li>
-            <li><button type="button" data-label="Membre 05 du projet, IAE Metz." aria-label="Membre 5 du projet, IAE Metz">05</button></li>
-            <li><button type="button" data-label="Membre 06 du projet, IAE Metz." aria-label="Membre 6 du projet, IAE Metz">06</button></li>
-            <li><button type="button" data-label="Membre 07 du projet, IAE Metz." aria-label="Membre 7 du projet, IAE Metz">07</button></li>
-            <li><button type="button" data-label="Membre 08 du projet, IAE Metz." aria-label="Membre 8 du projet, IAE Metz">08</button></li>
-            <li><button type="button" data-label="Membre 09 du projet, IAE Metz." aria-label="Membre 9 du projet, IAE Metz">09</button></li>
-            <li><button type="button" data-label="Membre 10 du projet, IAE Metz." aria-label="Membre 10 du projet, IAE Metz">10</button></li>
-            <li><button type="button" data-label="Membre 11 du projet, IAE Metz." aria-label="Membre 11 du projet, IAE Metz">11</button></li>
-            <li><button type="button" data-label="Membre 12 du projet, IAE Metz." aria-label="Membre 12 du projet, IAE Metz">12</button></li>
-            <li><button type="button" data-label="Membre 13 du projet, IAE Metz." aria-label="Membre 13 du projet, IAE Metz">13</button></li>
+            <li><button type="button" class="is-named" aria-label="Julien PAHIN, Chef de Projet."><span class="member-mark">01</span><span class="member-name">Julien PAHIN</span><span class="member-role">Chef de Projet</span></button></li>
+            <li><button type="button" class="is-named" aria-label="Clara KAHINDO, Trésorière."><span class="member-mark">02</span><span class="member-name">Clara KAHINDO</span><span class="member-role">Trésorière</span></button></li>
+            <li><button type="button" class="is-named" aria-label="Sara SADEGHI, Chargée communication et logistique."><span class="member-mark">03</span><span class="member-name">Sara SADEGHI</span><span class="member-role">Chargée communication et logistique</span></button></li>
+            <li><button type="button" class="is-named" aria-label="Mouna MOSSI, Chargée relations entreprises &amp; clients."><span class="member-mark">04</span><span class="member-name">Mouna MOSSI</span><span class="member-role">Chargée relations entreprises &amp; clients</span></button></li>
+            <li><button type="button" class="is-named" aria-label="Nassim HEBBADJ, Chargé de logistique."><span class="member-mark">05</span><span class="member-name">Nassim HEBBADJ</span><span class="member-role">Chargé de logistique</span></button></li>
+            <li><button type="button" class="is-named" aria-label="Serhii DIDIICHUK, Trésorier."><span class="member-mark">06</span><span class="member-name">Serhii DIDIICHUK</span><span class="member-role">Trésorier</span></button></li>
+            <li><button type="button" class="is-named" aria-label="Walid BENYGHZER, Trésorier."><span class="member-mark">07</span><span class="member-name">Walid BENYGHZER</span><span class="member-role">Trésorier</span></button></li>
+            <li><button type="button" class="is-named" aria-label="Mrine FERERA, Chargée relations entreprises &amp; clients."><span class="member-mark">08</span><span class="member-name">Mrine FERERA</span><span class="member-role">Chargée relations entreprises &amp; clients</span></button></li>
+            <li><button type="button" class="is-named" aria-label="Alaa SIAHMED, Chargé de logistique."><span class="member-mark">09</span><span class="member-name">Alaa SIAHMED</span><span class="member-role">Chargé de logistique</span></button></li>
+            <li><button type="button" class="is-named" aria-label="San POIROT, Chargé de communication et media."><span class="member-mark">10</span><span class="member-name">San POIROT</span><span class="member-role">Chargé de communication et media</span></button></li>
           </ul>
-          <p class="member-caption" id="member-caption" aria-hidden="true" data-bind="memberCaption">13 membres du projet, IAE Metz.</p>
+          <p class="member-caption" id="member-caption" aria-hidden="true" data-bind="memberCaption">10 membres du projet, IAE Metz.</p>
         </div>
       </div>
     </section>
@@ -166,8 +158,8 @@
         <div class="section-head reveal">
           <span class="index-no" data-bind="sectionIndex2">02</span>
           <div>
-            <p class="eyebrow" data-bind="formEyebrow">Devenir partenaire</p>
-            <h2 id="partner-title" data-bind="formTitle">Un petit formulaire.</h2>
+            <p class="eyebrow" data-bind="formEyebrow"></p>
+            <h2 id="partner-title" data-bind="formTitle">Devenir notre partenaire</h2>
           </div>
         </div>
         <p class="prose reveal" data-bind="formIntro">Choisissez votre place, puis laissez un nom, un établissement et un e-mail.</p>
@@ -250,7 +242,7 @@
         <a class="brand" href="#jour" aria-label="Oreka Metz" data-bind-aria="brandLabel">
           <img data-logo src="assets/logo-officiel.png?v=2" width="882" height="691" alt="">
         </a>
-        <p data-bind="footer">Site officiel d’OREKA, projet de 13 étudiants de l’IAE Metz.</p>
+        <p data-bind="footer">Site officiel d’OREKA</p>
       </div>
       <div>
         <p class="footer-label" data-bind="footerExplore">Explorer</p>
