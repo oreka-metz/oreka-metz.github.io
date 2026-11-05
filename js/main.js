@@ -204,10 +204,10 @@
     }
 
     function draw(time) {
-      const pink = paintColor("--pink", "#f61c96");
-      const soft = paintColor("--pink-soft", "#c2187a");
-      const deep = paintColor("--pink-2", "#d01278");
-      const ink = paintColor("--ink", "#2a1220");
+      const pink = paintColor("--pink", "#0c6ebd");
+      const soft = paintColor("--pink-soft", "#3c94d8");
+      const deep = paintColor("--pink-2", "#084e8c");
+      const ink = paintColor("--ink", "#10243a");
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = canvas.clientWidth || 300;
       const h = canvas.clientHeight || 220;

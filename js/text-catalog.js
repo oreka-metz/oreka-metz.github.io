@@ -1,18 +1,18 @@
 window.OREKA_COLOR_DEFAULTS = {
-  bg: "#fff7fb",
+  bg: "#f2f7fc",
   surface: "#ffffff",
-  ink: "#2a1220",
-  muted: "#5c3a4a",
-  faint: "#7a5364",
-  pink: "#f61c96",
-  pink2: "#d01278",
-  pinkSoft: "#c2187a",
-  inkOnPink: "#2a1220",
-  linkHover: "#8d105c",
-  line: "#e01386",
-  alert: "#9d1048",
-  memberLight: "#ff8ec4",
-  memberLight2: "#ffe3f1"
+  ink: "#10243a",
+  muted: "#3a5672",
+  faint: "#5d7692",
+  pink: "#0c6ebd",
+  pink2: "#084e8c",
+  pinkSoft: "#3c94d8",
+  inkOnPink: "#ffffff",
+  linkHover: "#063864",
+  line: "#1a78c4",
+  alert: "#0a3a66",
+  memberLight: "#1d74b8",
+  memberLight2: "#2f86c8"
 };
 
 window.OREKA_TEXT_GROUPS = [

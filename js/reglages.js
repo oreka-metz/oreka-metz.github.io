@@ -269,7 +269,7 @@
       field.value = colors[key] || field.dataset.default || COLOR_DEFAULTS[key] || "#000000";
     });
     const logo = document.getElementById("logo-preview");
-    logo.src = data.logo || "assets/logo-officiel.png?v=2";
+    logo.src = data.logo || "assets/logo-officiel.png?v=3";
     logo.dataset.value = data.logo || "";
     renderMembers(data.members);
     renderPartners(data.partners || []);

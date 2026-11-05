@@ -45,9 +45,9 @@ body { background: var(--bg); }
   width: 140px;
   height: auto;
   background:
-    linear-gradient(45deg, #f3d5e6 25%, transparent 25%),
-    linear-gradient(-45deg, #f3d5e6 25%, transparent 25%),
-    #fff7fb;
+    linear-gradient(45deg, #d5e4f3 25%, transparent 25%),
+    linear-gradient(-45deg, #d5e4f3 25%, transparent 25%),
+    #f2f7fc;
   background-size: 16px 16px;
   border-radius: 12px;
 }
@@ -84,7 +84,7 @@ input[type="color"] {
   margin-bottom: 0.7rem;
   border-radius: 16px;
   border: 1px solid var(--line);
-  background: #fff7fb;
+  background: #f2f7fc;
 }
 
 .partner-edit .row,

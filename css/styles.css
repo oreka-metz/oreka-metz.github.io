@@ -23,22 +23,22 @@
 }
 
 :root {
-  --bg: #fff7fb;
+  --bg: #f2f7fc;
   --surface: #ffffff;
   --bg-raise: var(--surface);
-  --ink: #2a1220;
-  --muted: #5c3a4a;
-  --faint: #7a5364;
-  --line-color: #e01386;
+  --ink: #10243a;
+  --muted: #3a5672;
+  --faint: #5d7692;
+  --line-color: #1a78c4;
   --line: color-mix(in srgb, var(--line-color) 22%, transparent);
-  --pink: #f61c96;
-  --pink-2: #d01278;
-  --pink-soft: #c2187a;
-  --ink-on-pink: #2a1220;
-  --link-hover: #8d105c;
-  --alert: #9d1048;
-  --member-light: #ff8ec4;
-  --member-light-2: #ffe3f1;
+  --pink: #0c6ebd;
+  --pink-2: #084e8c;
+  --pink-soft: #3c94d8;
+  --ink-on-pink: #ffffff;
+  --link-hover: #063864;
+  --alert: #0a3a66;
+  --member-light: #1d74b8;
+  --member-light-2: #2f86c8;
   --serif: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
   --sans: "Manrope", "Segoe UI", sans-serif;
   --shadow: 0 18px 40px color-mix(in srgb, var(--pink) 12%, transparent);
